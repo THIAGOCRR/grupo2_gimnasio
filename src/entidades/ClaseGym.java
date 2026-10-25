@@ -4,10 +4,87 @@
  */
 package entidades;
 
+import java.time.LocalTime;
+
 /**
  *
  * @author crn70
  */
 public class ClaseGym {
     
+    private int idClase;
+    private String nombre;
+    private int entrenador;
+    private LocalTime horario;
+    private String capacidad;
+    private boolean estado;
+
+    public ClaseGym(int idClase, String nombre, int entrenador, LocalTime horario, String capacidad, boolean estado) {
+        this.idClase = idClase;
+        this.nombre = nombre;
+        this.entrenador = entrenador;
+        this.horario = horario;
+        this.capacidad = capacidad;
+        this.estado = estado;
+    }
+
+    public ClaseGym(String nombre, int entrenador, LocalTime horario, String capacidad, boolean estado) {
+        this.nombre = nombre;
+        this.entrenador = entrenador;
+        this.horario = horario;
+        this.capacidad = capacidad;
+        this.estado = estado;
+    }
+
+    public ClaseGym() {
+    }
+
+    public int getIdClase() {
+        return idClase;
+    }
+
+    public void setIdClase(int idClase) {
+        this.idClase = idClase;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getEntrenador() {
+        return entrenador;
+    }
+
+    public void setEntrenador(int entrenador) {
+        this.entrenador = entrenador;
+    }
+
+    public LocalTime getHorario() {
+        return horario;
+    }
+
+    public void setHorario(LocalTime horario) {
+        this.horario = horario;
+    }
+
+    public String getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(String capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
 }
