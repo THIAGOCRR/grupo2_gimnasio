@@ -10,7 +10,7 @@ package entidades;
  */
 public class Entrenador {
     
-    private int idEntrenador;
+    private int idEntrenador = -1;
     private int dni;
     private String nombre;
     private String apellido;

@@ -12,7 +12,7 @@ import java.time.LocalTime;
  */
 public class ClaseGym {
     
-    private int idClase;
+    private int idClase = -1;
     private String nombre;
     private int entrenador;
     private LocalTime horario;

@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class Pase {
     
-    private int idPase;
+    private int idPase = -1;
     private int socio;
     private int cantidadPases;
     private LocalDate fechaInicio;
