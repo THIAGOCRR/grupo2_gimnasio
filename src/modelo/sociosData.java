@@ -8,6 +8,6 @@ package modelo;
  *
  * @author crn70
  */
-public class sociosData {
+public class SociosData {
     
 }
