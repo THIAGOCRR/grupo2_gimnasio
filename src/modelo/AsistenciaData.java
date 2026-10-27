@@ -69,6 +69,8 @@ public class AsistenciaData {
                 a.setSocio(rs.getInt("ID_Socio"));
                 a.setClase(rs.getInt("ID_Clase"));
                 a.setFechaAsistencia(rs.getDate("Fecha_Asistencia").toLocalDate());
+                
+                System.out.println("Asistencia encontrada");
             }
             
             rs.close();

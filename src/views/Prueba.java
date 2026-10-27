@@ -7,6 +7,7 @@ package views;
 import entidades.Asistencia;
 import entidades.Socio;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import modelo.AsistenciaData;
 import modelo.SociosData;
 import modelo.miConexion;
@@ -21,31 +22,89 @@ public class Prueba {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) {    
     
-        
-         
-               miConexion conexion = new miConexion();
-        AsistenciaData asistenciaData = new AsistenciaData(conexion);
+    miConexion conexion = new miConexion();    
     
-            Asistencia asistencia = new Asistencia();
+    /* Prueba de guardarAsistencia()    
+    AsistenciaData asistenciaData = new AsistenciaData(conexion);
+    
+    Asistencia asistencia = new Asistencia();
 
     asistencia.setSocio(1);    
-        asistencia.setClase(1);      
+    asistencia.setClase(1);      
     asistencia.setFechaAsistencia(LocalDate.now());
 
-      asistenciaData.guardarAsistencia(asistencia);
+    asistenciaData.guardarAsistencia(asistencia);
     System.out.println("Asistencia guardada correctamente");
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    */    
+      
+    /* Prueba de buscarAsistencia()
+    AsistenciaData ad=new AsistenciaData(conexion);
+    Asistencia a=ad.buscarAsistencia(1);
+    */    
+       
+    /* Prueba de listarAsistencia()
+    AsistenciaData ad = new AsistenciaData(conexion);
+
+    ArrayList<Asistencia> asistencias = ad.listarAsistencia();
+
+    for (Asistencia a : asistencias) {
+        System.out.println("ID: " + a.getIdAsistencia());
+        System.out.println("Socio: " + a.getSocio());
+        System.out.println("Clase: " + a.getClase());
+        System.out.println("Fecha: " + a.getFechaAsistencia());
+        System.out.println("-------------------------");
+    }    
+    */    
+    
+    /* PruebA 
+    AsistenciaData ad=new AsistenciaData(conexion);
+    
+    ArrayList<Asistencia> asistencias = ad.listarAsistenciasPorSocio(1);
+    
+    for (Asistencia a : asistencias) {
+        System.out.println("ID: " + a.getIdAsistencia());
+        System.out.println("Socio: " + a.getSocio());
+        System.out.println("Clase: " + a.getClase());
+        System.out.println("Fecha: " + a.getFechaAsistencia());
+        System.out.println("-------------------------");
+    }  
+    */
+
+    /* Prueba de actualizarAsistencia
+    AsistenciaData ad=new AsistenciaData(conexion);
+    
+    Asistencia asistencia = new Asistencia();
+    
+    asistencia.setIdAsistencia(1);
+    asistencia.setSocio(1);
+    asistencia.setClase(1);
+    asistencia.setFechaAsistencia(LocalDate.now());
+
+    ad.actualizarAsistencia(asistencia);
+    */
+    
+    /* Prueba de borrarAsistencia
+    AsistenciaData ad=new AsistenciaData(conexion);
+    
+    ad.borrarAsistencia(1);
+    */
+
+    /*
+    AsistenciaData ad=new AsistenciaData(conexion);
+    
+    ArrayList<Asistencia> asistencias=ad.listarAsistenciasPorClase(1);
+    
+    for (Asistencia a : asistencias) {
+        System.out.println("ID: " + a.getIdAsistencia());
+        System.out.println("Socio: " + a.getSocio());
+        System.out.println("Clase: " + a.getClase());
+        System.out.println("Fecha: " + a.getFechaAsistencia());
+        System.out.println("-------------------------");
+    }
+    */
+
     }
     
 }
