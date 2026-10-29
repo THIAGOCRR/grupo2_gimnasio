@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package views;
-
+import java.sql.Connection;
 import entidades.Asistencia;
+import entidades.Entrenador;
 import entidades.Socio;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import modelo.AsistenciaData;
+import modelo.EntrenadorData;
 import modelo.SociosData;
 import modelo.miConexion;
 
@@ -104,7 +107,91 @@ public class Prueba {
         System.out.println("-------------------------");
     }
     */
-
-    }
+    /*---------------------------------------------------------------------------------*/
     
+    /*
+    Agregar Entrenador: 
+    
+    EntrenadorData en = new EntrenadorData(conexion);
+     Entrenador nuevoEntrenador = new Entrenador(12345678,"Carlos","Pérez","Fútbol", true);
+
+            
+            System.out.println("Intentando agregar entrenador...");
+           en.agregarEntrenador(nuevoEntrenador);
+    
+    */
+    
+    /*---------------------------------------------------------------------------------*/
+    /*
+    Actualizar Entrenador: 
+    
+     EntrenadorData en = new EntrenadorData(conexion);
+      Entrenador nuevoEntrenador = new Entrenador(123,"Roberto","Lopez","Natacion", true);
+     System.out.println("?Intentando actualizar entrenador...");
+            en.ActualizarEntrenador(nuevoEntrenador);
+
+    
+      */
+    
+     /*---------------------------------------------------------------------------------*/
+    
+    
+  /*
+     Eliminar Entrenadores: 
+
+EntrenadorData en = new EntrenadorData(conexion);
+en.eliminarEntrenador(4);
+    */
+   
+     
+      /*---------------------------------------------------------------------------------*/
+ /*
+      EntrenadorData en = new EntrenadorData(conexion);
+     int idEntrenador = 5; 
+
+      Entrenador encontrado = en.buscarEntrenador(idEntrenador);
+
+     
+     
+        System.out.println("Buscando entrenador con ID = " + idEntrenador + " "+ encontrado.getNombre() +" "+ encontrado.getApellido() );
+        
+   */    
+  /*---------------------------------------------------------------------------------*/
+ /*
+ 
+ Listar Entrenadores: 
+ EntrenadorData en = new EntrenadorData(conexion);
+ List<Entrenador> activos = en.listarEntrenadores();
+   for (Entrenador e : activos) {
+    System.out.println("ID: " + e.getIdEntrenador());
+    System.out.println("Nombre: " + e.getNombre() + " " + e.getApellido());
+    System.out.println("----------------------");
+}
+    
+    
+   */ 
+  /*---------------------------------------------------------------------------------*/   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    }
 }

@@ -85,4 +85,17 @@ public class Entrenador {
         this.estado = estado;
     }
     
+    
+    
+   @Override
+public String toString() {
+    return "ID: " + idEntrenador +
+        " | DNI: " + dni +
+              " | " + nombre + " " + apellido +
+      " | Especialidad: " + especialidad +
+       " | Estado: " + (estado ? "Activo ✅" : "Inactivo ❌");
+}
+    
+    
+    
 }

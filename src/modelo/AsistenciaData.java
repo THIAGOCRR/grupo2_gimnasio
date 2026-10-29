@@ -33,7 +33,7 @@ public class AsistenciaData {
         String sql="INSERT INTO asistencias(ID_Socio, ID_Clase, Fecha_Asistencia) VALUES (?, ?, ?)";
         
         try { 
-            PreparedStatement ps=con.prepareStatement(sql);
+           PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, asistencia.getSocio());
             ps.setInt(2, asistencia.getClase());
             ps.setDate(3, Date.valueOf(asistencia.getFechaAsistencia()));
