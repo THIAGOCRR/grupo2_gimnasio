@@ -190,6 +190,8 @@ public class AsistenciaData {
             
             if(filas > 0) {
                 System.out.println("Asistencia borrada correctamente");
+            } else if (filas == 0) {
+                System.out.println("No se encontro el ID");
             } else {
                 System.out.println("No se pudo borrar la asistencia");
             }

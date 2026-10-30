@@ -16,10 +16,10 @@ public class ClaseGym {
     private String nombre;
     private int entrenador;
     private LocalTime horario;
-    private String capacidad;
+    private int capacidad;
     private boolean estado;
 
-    public ClaseGym(int idClase, String nombre, int entrenador, LocalTime horario, String capacidad, boolean estado) {
+    public ClaseGym(int idClase, String nombre, int entrenador, LocalTime horario, int capacidad, boolean estado) {
         this.idClase = idClase;
         this.nombre = nombre;
         this.entrenador = entrenador;
@@ -28,7 +28,7 @@ public class ClaseGym {
         this.estado = estado;
     }
 
-    public ClaseGym(String nombre, int entrenador, LocalTime horario, String capacidad, boolean estado) {
+    public ClaseGym(String nombre, int entrenador, LocalTime horario, int capacidad, boolean estado) {
         this.nombre = nombre;
         this.entrenador = entrenador;
         this.horario = horario;
@@ -71,11 +71,11 @@ public class ClaseGym {
         this.horario = horario;
     }
 
-    public String getCapacidad() {
+    public int getCapacidad() {
         return capacidad;
     }
 
-    public void setCapacidad(String capacidad) {
+    public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
 
