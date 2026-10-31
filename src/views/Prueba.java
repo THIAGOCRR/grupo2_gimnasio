@@ -108,30 +108,28 @@ public class Prueba {
     }
     */
     /*---------------------------------------------------------------------------------*/
-    
-    /*
-    Agregar Entrenador: 
-    
     EntrenadorData en = new EntrenadorData(conexion);
-     Entrenador nuevoEntrenador = new Entrenador(12345678,"Carlos","Pérez","Fútbol", true);
-
-            
-            System.out.println("Intentando agregar entrenador...");
-           en.agregarEntrenador(nuevoEntrenador);
     
-    */
+     Entrenador entrenadorActualizar = new Entrenador();
+entrenadorActualizar.setIdEntrenador(5);      
+entrenadorActualizar.setDni(22222);
+entrenadorActualizar.setNombre("Carlos");
+entrenadorActualizar.setApellido("Perez");
+entrenadorActualizar.setEspecialidad("Futbol"); 
+entrenadorActualizar.setEstado(true);
+    
+    System.out.println("actualizando entrenador");
+en.ActualizarEntrenador(entrenadorActualizar);
+            
     
     /*---------------------------------------------------------------------------------*/
-    /*
-    Actualizar Entrenador: 
+   
+   
     
-     EntrenadorData en = new EntrenadorData(conexion);
-      Entrenador nuevoEntrenador = new Entrenador(123,"Roberto","Lopez","Natacion", true);
-     System.out.println("?Intentando actualizar entrenador...");
-            en.ActualizarEntrenador(nuevoEntrenador);
+   
 
-    
-      */
+   
+      
     
      /*---------------------------------------------------------------------------------*/
     
@@ -172,26 +170,74 @@ en.eliminarEntrenador(4);
    */ 
   /*---------------------------------------------------------------------------------*/   
     
+     /* 
+  Agregar Socio: 
+     SociosData so = new SociosData(conexion);
+        Socio nuevo = new Socio( 45123777,"Carla", "Díaz",28, "carla@email.com", 266111222, true);
+
+       
+        so.agregarSocio(nuevo);
+ */ 
     
     
     
+      /*---------------------------------------------------------------------------------*/   
     
+      
+        /* 
+      Eliminar Socio: 
+      
+     SociosData so = new SociosData(conexion);
+      int id = 1; 
+
+       
+        Socio encontrado = so.buscarSocio(id);
+    so.eliminarSocio(id);
+      
+     */ 
     
+    /*---------------------------------------------------------------------------------*/   
     
+     /* 
+      SociosData so = new SociosData(conexion);
+
+        Socio actualizarSocio = new Socio();
+        actualizarSocio.setIdSocio(2);       
+        actualizarSocio.setDni(22222);
+        actualizarSocio.setNombre("Roberto");
+        actualizarSocio.setApellido("Lopez");
+        actualizarSocio.setEdad(35);
+        actualizarSocio.setCorreo("roberto@email.com");
+        actualizarSocio.setTelefono(266111222);
+        actualizarSocio.setEstado(true);
+
+        System.out.println("actualizando socio");
+        so.ActualizarSocio(actualizarSocio);
+   
+      */ 
+     /*---------------------------------------------------------------------------------*/  
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
     
     }
 }
