@@ -58,6 +58,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem1);
 
         jMenuItem2Entrenador.setText("Entrenador");
+        jMenuItem2Entrenador.addActionListener(this::jMenuItem2EntrenadorActionPerformed);
         jMenu2.add(jMenuItem2Entrenador);
 
         jMenuBar1.add(jMenu2);
@@ -100,6 +101,24 @@ public class Principal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2EntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2EntrenadorActionPerformed
+        // TODO add your handling code here:
+        
+        
+         escritorio.removeAll();
+         escritorio.repaint();
+        
+         
+         viewEntrenador en = new viewEntrenador();
+         escritorio.add(en);
+        en.setVisible(true);
+        escritorio.moveToFront(en);
+        
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem2EntrenadorActionPerformed
 
     /**
      * @param args the command line arguments
