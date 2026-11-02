@@ -108,6 +108,11 @@ public class Prueba {
     }
     */
     /*---------------------------------------------------------------------------------*/
+    
+    /*
+    
+    Actualizar Entrenador: 
+    
     EntrenadorData en = new EntrenadorData(conexion);
     
      Entrenador entrenadorActualizar = new Entrenador();
@@ -121,16 +126,19 @@ entrenadorActualizar.setEstado(true);
     System.out.println("actualizando entrenador");
 en.ActualizarEntrenador(entrenadorActualizar);
             
-    
+    */
     /*---------------------------------------------------------------------------------*/
-   
-   
     
-   
-
+    /*
+     Agregar Entrenador:
+    
+      EntrenadorData en = new EntrenadorData(conexion);
+     Entrenador nuevoEntrenador = new Entrenador(12345678,"Carlos","Pérez","Fútbol", true);
+System.out.println("agregando entrenador:");
+           en.agregarEntrenador(nuevoEntrenador);
    
       
-    
+    */
      /*---------------------------------------------------------------------------------*/
     
     
@@ -144,6 +152,7 @@ en.eliminarEntrenador(4);
      
       /*---------------------------------------------------------------------------------*/
  /*
+      buscar Entrenador: 
       EntrenadorData en = new EntrenadorData(conexion);
      int idEntrenador = 5; 
 
@@ -199,6 +208,7 @@ en.eliminarEntrenador(4);
     /*---------------------------------------------------------------------------------*/   
     
      /* 
+    Actualizar socios: 
       SociosData so = new SociosData(conexion);
 
         Socio actualizarSocio = new Socio();
