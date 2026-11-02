@@ -88,6 +88,7 @@ public class viewSocios extends javax.swing.JInternalFrame {
         btnNuevo.setText("Nuevo");
 
         btnBuscarID.setText("Buscar");
+        btnBuscarID.addActionListener(this::btnBuscarIDActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,6 +201,15 @@ public class viewSocios extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarIDActionPerformed
+        // TODO add your handling code here:
+        
+        String id=txtID.getText();
+        
+        Socio socio=sociosData.
+        
+    }//GEN-LAST:event_btnBuscarIDActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
