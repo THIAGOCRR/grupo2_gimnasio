@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author crn70
  */
-public class SociosData {
+public class sociosData {
     
     
     
@@ -29,7 +29,7 @@ public class SociosData {
        
        
        
-       public SociosData(miConexion conexion){
+       public sociosData(miConexion conexion){
         this.con = conexion.buscarConexion();
     }
     
@@ -104,14 +104,13 @@ public class SociosData {
      
      }
        
-       public Socio buscarSocio(int id) {
-    String sql = "SELECT ID_Socio, DNI, Nombre, Apellido, Edad, Correo, Telefono, Estado " +
-                 "FROM socios WHERE ID_Socio = ?";
+       public Socio buscarSocio(String dni) {
+    String sql = "SELECT ID_Socio, DNI, Nombre, Apellido, Edad, Correo, Telefono, Estado FROM socios WHERE DNI = ?";
 
     Socio socio = null;
 
     try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setInt(1, id);
+        ps.setString(1, dni);
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
