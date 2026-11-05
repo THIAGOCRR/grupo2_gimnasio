@@ -5,6 +5,7 @@
 package views;
 
 import entidades.Socio;
+import javax.swing.JOptionPane;
 import modelo.miConexion;
 import modelo.sociosData;
 
@@ -231,6 +232,23 @@ public class viewSocios extends javax.swing.JInternalFrame {
         
         Socio socio=sd.buscarSocio(dni);
         
+        if (socio == null) {
+        
+            JOptionPane.showMessageDialog(null, "No existe ese socio");
+        
+        } else {
+        
+            JOptionPane.showMessageDialog(null, "¡Socio encontrado!");
+        
+            txtID.setText(String.valueOf(socio.getIdSocio()));
+            txtDni.setText(String.valueOf(socio.getDni()));
+            txtNombre.setText(socio.getNombre());
+            txtApellido.setText(socio.getApellido());
+            txtEdad.setText(String.valueOf(socio.getEdad()));
+            txtGmail.setText(socio.getCorreo());
+            txtTelefono.setText(String.valueOf(socio.getTelefono()));
+            cbxEstado.setSelected(socio.isEstado());
+        }
     }//GEN-LAST:event_btnBuscarIDActionPerformed
 
 
