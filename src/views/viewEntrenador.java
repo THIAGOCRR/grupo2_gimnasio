@@ -3,18 +3,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package views;
+import com.sun.jdi.connect.spi.Connection;
+import entidades.Entrenador;
+import javax.swing.JOptionPane;
+import modelo.EntrenadorData;
+import modelo.miConexion;
 
 /**
  *
  * @author crn70
  */
 public class viewEntrenador extends javax.swing.JInternalFrame {
-
+  private miConexion conexion=new miConexion();
+    
+    private EntrenadorData en=new EntrenadorData(conexion);
     /**
      * Creates new form viewSocios
      */
     public viewEntrenador() {
         initComponents();
+        
+        
+         miConexion conexion=new miConexion();
+    
+     EntrenadorData en =new EntrenadorData(conexion);
+        
     }
 
     /**
@@ -43,7 +56,7 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnAltaLogica = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
-        btnBuscarID = new javax.swing.JButton();
+        btnBuscarDNI = new javax.swing.JButton();
         txtDNI = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -69,23 +82,31 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
         cbxEstado.setText("Activo");
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
         btnBajalogica.setText("Dar de Baja");
+        btnBajalogica.addActionListener(this::btnBajalogicaActionPerformed);
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
         btnAltaLogica.setText("Dar de Alta");
+        btnAltaLogica.addActionListener(this::btnAltaLogicaActionPerformed);
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(this::btnNuevoActionPerformed);
 
-        btnBuscarID.setText("Buscar");
+        btnBuscarDNI.setText("Buscar");
+        btnBuscarDNI.addActionListener(this::btnBuscarDNIActionPerformed);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("DNI: ");
 
         jButton1.setText("Salir");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,16 +140,14 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(55, 55, 55)
-                                    .addComponent(btnBajalogica, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnBuscarID)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscarDNI))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(55, 55, 55)
-                                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnBajalogica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -164,12 +183,12 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarID))
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarDNI))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,12 +223,281 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscarDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDNIActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+         try{
+       
+                if(txtDNI.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(this, "ingrese un dni de algun entrenador");
+                    return;
+                }
+                
+               
+           Integer dni = Integer.parseInt(txtDNI.getText().trim());
+  
+     
+        Entrenador entrenador = en.buscarEntrenador(dni);
+                
+                
+                if(entrenador != null){
+                    
+                    txtID.setText(String.valueOf(entrenador.getIdEntrenador()));
+                    txtDNI.setText(String.valueOf(entrenador.getDni()));
+                    txtNombre.setText(entrenador.getNombre());
+                    txtApellido.setText(entrenador.getApellido());
+                    txtEspecialidad.setText(entrenador.getEspecialidad());
+                    cbxEstado.setSelected(entrenador.isEstado());
+                    
+                }else{
+                    JOptionPane.showMessageDialog(this, "no se encontró el entrenador");
+                } 
+            } 
+        
+        
+        catch(NumberFormatException e ){
+        
+        JOptionPane.showMessageDialog(this ,"ingrese un numero valido de algun entrenador ");
+        
+        
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnBuscarDNIActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+
+
+
+ try{
+             
+           Integer dni = Integer.parseInt(txtDNI.getText().trim());
+        String nombre = txtNombre.getText().trim();
+        String apellido = txtApellido.getText().trim();
+        String especialidad = txtEspecialidad.getText().trim();
+            
+            if(nombre.isEmpty() || apellido.isEmpty() || especialidad.isEmpty() ){
+                JOptionPane.showMessageDialog(this, "alguno de los campos nombre, apellido o especialidad estan vacios");
+                return;
+                 
+                
+            }
+            
+            boolean estado = cbxEstado.isSelected(); 
+                  Entrenador agregar = new Entrenador(dni, nombre, apellido, especialidad, estado);
+                  
+                  en.agregarEntrenador(agregar);
+                  
+        txtDNI.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtEspecialidad.setText("");
+        txtID.setText("");
+                  
+                  
+                  
+                  
+                  
+        
+         } catch (Exception ex){
+            JOptionPane.showMessageDialog(this, "error al guardar: "+ex.getMessage());  
+        }
+
+
+
+
+
+
+
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        //
+        
+        if (txtID.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "busca primero un entrenador");
+        return;
+    }
+
+    try {
+        int id = Integer.parseInt(txtID.getText().trim());
+        
+        
+        txtID.setText("");
+            txtDNI.setText("");
+            txtNombre.setText("");
+            txtApellido.setText("");
+            txtEspecialidad.setText("");
+        en.eliminarEntrenador(id);
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "el ID debe ser un número valido");
+    }
+        
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+        try{
+        if(txtID.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "debes buscar un entrenador para obtener su ID");
+            return;
+        }
+        
+        if(txtDNI.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "ingresa el nuevo número de DNI");
+            return;
+        }
+        if(txtNombre.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "ingresa el nuevo nombre");
+            return;
+        }
+        if(txtApellido.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "ingresa el nuevo apellido");
+            return;
+        }
+        if(txtEspecialidad.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "ingresa la especialidad");
+            return;
+        }
+        
+        int idEntrenador = Integer.parseInt(txtID.getText().trim());
+        int nuevoDni = Integer.parseInt(txtDNI.getText().trim());
+        String nuevoNombre = txtNombre.getText().trim();
+        String nuevoApellido = txtApellido.getText().trim();
+        String nuevoEspecialidad = txtEspecialidad.getText().trim();
+        
+          
+        Entrenador entrenadorActualizar = new Entrenador();
+        
+        entrenadorActualizar.setIdEntrenador(idEntrenador);
+        entrenadorActualizar.setDni(nuevoDni);
+        entrenadorActualizar.setNombre(nuevoNombre);
+        entrenadorActualizar.setApellido(nuevoApellido);
+        entrenadorActualizar.setEspecialidad(nuevoEspecialidad);
+        entrenadorActualizar.setEstado(true);
+        
+        en.ActualizarEntrenador(entrenadorActualizar);
+        
+      
+        
+    }catch(Exception e){
+        JOptionPane.showMessageDialog(this, "error al procesar la informacion: "+ e.getMessage());
+    }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnAltaLogicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaLogicaActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+        
+         if (txtID.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "debes buscar un entrenador primero");
+        return;
+    }
+        
+        try {
+        
+        int idEntrenador = Integer.parseInt(txtID.getText().trim());
+        en.altaLogica(idEntrenador);
+        
+        
+        
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "el ID debe ser un número válido");
+    }
+        
+    }//GEN-LAST:event_btnAltaLogicaActionPerformed
+
+    private void btnBajalogicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajalogicaActionPerformed
+        // TODO add your handling code here:
+        
+        
+         if (txtID.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "debes buscar un entrenador primero");
+        return;
+    }
+        
+        try {
+        
+        int idEntrenador = Integer.parseInt(txtID.getText().trim());
+        
+        
+        en.bajaLogica(idEntrenador);
+        
+        
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "el ID debe ser un numero valido");
+    }
+        
+        
+        
+    }//GEN-LAST:event_btnBajalogicaActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        
+        
+         txtID.setText("");
+            txtDNI.setText("");
+            txtNombre.setText("");
+            txtApellido.setText("");
+            txtEspecialidad.setText("");
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAltaLogica;
     private javax.swing.JButton btnBajalogica;
-    private javax.swing.JButton btnBuscarID;
+    private javax.swing.JButton btnBuscarDNI;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;

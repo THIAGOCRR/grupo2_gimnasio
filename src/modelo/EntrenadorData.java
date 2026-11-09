@@ -54,16 +54,16 @@ public class EntrenadorData {
     return lista;
 }
     
-    public Entrenador buscarEntrenador(int id ){
+    public Entrenador buscarEntrenador(int dni ){
     
-       String sql = "SELECT ID_Entrenador, DNI, Nombre, Apellido, Especialidad, Estado " +
-                 "FROM entrenadores WHERE ID_Entrenador = ? AND Estado = 1";
+        String sql = "SELECT ID_Entrenador, DNI, Nombre, Apellido, Especialidad, Estado " +
+                 "FROM entrenadores WHERE DNI = ? ";
     
     Entrenador entrenador = null;
     
     try{
     PreparedStatement ps = con.prepareStatement(sql);
-    ps.setInt(1, id);
+    ps.setInt(1, dni);
     ResultSet rs= ps.executeQuery();
     
     
@@ -71,7 +71,7 @@ public class EntrenadorData {
     
     
       entrenador = new Entrenador();
-      entrenador.setIdEntrenador(id);
+      entrenador.setIdEntrenador(rs.getInt("ID_Entrenador"));
       entrenador.setDni(rs.getInt("DNI"));
       entrenador.setApellido(rs.getString("Apellido"));
       entrenador.setNombre(rs.getString("Nombre"));
@@ -218,6 +218,7 @@ public class EntrenadorData {
    
        
        
+    
        
    
    
@@ -229,14 +230,58 @@ public class EntrenadorData {
      
      
      
+     public void bajaLogica(int id){
+     
+     
+     
+     String sql = "UPDATE entrenadores SET Estado = 0 WHERE ID_Entrenador = ?";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        int filas = ps.executeUpdate();
+
+        if (filas == 1) {
+            JOptionPane.showMessageDialog(null, "Entrenador desactivado (baja lógica)");
+        } else {
+            JOptionPane.showMessageDialog(null, "No existe ese entrenador");
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al dar baja: " + ex.getMessage());
+    }
+     }
      
      
      
      
      
      
+      public void altaLogica(int id){
      
      
+     
+     String sql = "UPDATE entrenadores SET Estado = 1 WHERE ID_Entrenador = ?";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        int filas = ps.executeUpdate();
+
+        if (filas == 1) {
+            JOptionPane.showMessageDialog(null, "Entrenador activado");
+        } else {
+            JOptionPane.showMessageDialog(null, "No existe ese entrenador");
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al reactivar: " + ex.getMessage());
+    }
+     
+     
+     
+     
+     
+     
+     }
      
      
      

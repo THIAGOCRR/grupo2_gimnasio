@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.AsistenciaData;
 import modelo.EntrenadorData;
-import modelo.SociosData;
+import modelo.sociosData;
 import modelo.miConexion;
 
 /**
