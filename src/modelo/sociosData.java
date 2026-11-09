@@ -42,7 +42,7 @@ public class sociosData {
         ps.setString(3, socio.getApellido());
         ps.setInt(4, socio.getEdad());       
         ps.setString(5, socio.getCorreo());    
-        ps.setInt(6, socio.getTelefono());     
+        ps.setLong(6, socio.getTelefono());     
         ps.setBoolean(7, socio.isEstado());   
 
         int exito = ps.executeUpdate();
@@ -55,7 +55,8 @@ public class sociosData {
         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socios");
     }
 }
-       public void eliminarSocio(int id){
+    
+    public void eliminarSocio(int id){
     
            
           String sql = "DELETE FROM socios WHERE ID_Socio = ?";
@@ -69,7 +70,7 @@ public class sociosData {
     }
 }
        
-       public void ActualizarSocio(Socio socio){
+    public void ActualizarSocio(Socio socio){
      
      String sql = "UPDATE socios SET DNI = ?, Apellido = ?, Nombre = ?, Telefono = ? , Edad = ? , Correo = ? WHERE ID_Socio = ?  ";
          
@@ -80,7 +81,7 @@ public class sociosData {
              ps.setInt(1, socio.getDni());
           ps.setString(2, socio.getApellido());
           ps.setString(3, socio.getNombre());
-          ps.setInt(4, socio.getTelefono());
+          ps.setLong(4, socio.getTelefono());
           ps.setInt(5, socio.getEdad());
           ps.setString(6, socio.getCorreo());
           ps.setInt(7,socio.getIdSocio());
@@ -104,7 +105,7 @@ public class sociosData {
      
      }
        
-       public Socio buscarSocio(String dni) {
+    public Socio buscarSocio(String dni) {
     String sql = "SELECT ID_Socio, DNI, Nombre, Apellido, Edad, Correo, Telefono, Estado FROM socios WHERE DNI = ?";
 
     Socio socio = null;
@@ -121,10 +122,8 @@ public class sociosData {
             socio.setApellido(rs.getString("Apellido"));
             socio.setEdad(rs.getInt("Edad"));
             socio.setCorreo(rs.getString("Correo"));
-            socio.setTelefono(rs.getInt("Telefono"));
+            socio.setTelefono(rs.getLong("Telefono"));
             socio.setEstado(rs.getBoolean("Estado"));
-        } else {
-            JOptionPane.showMessageDialog(null, "No existe ese socio");
         }
 
     } catch (SQLException ex) {
@@ -134,7 +133,7 @@ public class sociosData {
     return socio;
 }
        
-       public List<Socio> listarSocios() {
+    public List<Socio> listarSocios() {
     List<Socio> lista = new ArrayList<>();
     String sql = "SELECT ID_Socio, DNI, Nombre, Apellido, Edad, Correo, Telefono, Estado FROM socios";
 
@@ -149,7 +148,7 @@ public class sociosData {
             socio.setApellido(rs.getString("Apellido"));
             socio.setEdad(rs.getInt("Edad"));
             socio.setCorreo(rs.getString("Correo"));
-            socio.setTelefono(rs.getInt("Telefono"));
+            socio.setTelefono(rs.getLong("Telefono"));
             socio.setEstado(rs.getBoolean("Estado"));
             lista.add(socio);
         }
@@ -160,35 +159,63 @@ public class sociosData {
     return lista;
 }
        
+    public void darDeBaja (int dni) {
        
+        String sql = "UPDATE socios SET Estado = 0 WHERE DNI = ?";
        
+        try {
+             
+            PreparedStatement ps=con.prepareStatement(sql);    
+            ps.setInt(1, dni);
+            
+            int exito = ps.executeUpdate();
+            
+            if (exito == 1) {
+            
+                JOptionPane.showMessageDialog(null, "Dado de baja correctamente");
+            
+            } else {
+            
+                JOptionPane.showMessageDialog(null, "No se pudo dar de baja");
+                
+            }
+            
+        } catch (SQLException ex) {
+           
+            JOptionPane.showMessageDialog(null, "Error al dar de baja " + ex.getMessage());
+            
+        }
        
+    }
+    
+    public void darDeAlta (int dni) {
        
+        String sql = "UPDATE socios SET Estado = 1 WHERE DNI = ?";
        
+        try {
+             
+            PreparedStatement ps=con.prepareStatement(sql);    
+            ps.setInt(1, dni);
+            
+            int exito = ps.executeUpdate();
+            System.out.println("Filas afectadas: " + exito);
+            
+            if (exito == 1) {
+            
+                JOptionPane.showMessageDialog(null, "Dado de alta correctamente");
+            
+            } else {
+            
+                JOptionPane.showMessageDialog(null, "No se pudo dar de alta");
+                
+            }
+            
+        } catch (SQLException ex) {
+           
+            JOptionPane.showMessageDialog(null, "Error al dar de alta " + ex.getMessage());
+            
+        }
        
+    }
        
-       
-       
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

@@ -87,16 +87,22 @@ public class viewSocios extends javax.swing.JInternalFrame {
         cbxEstado.setText("Activo");
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
         btnBajalogica.setText("Dar de Baja");
+        btnBajalogica.addActionListener(this::btnBajalogicaActionPerformed);
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
         btnAltaLogica.setText("Dar de Alta");
+        btnAltaLogica.addActionListener(this::btnAltaLogicaActionPerformed);
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(this::btnNuevoActionPerformed);
 
         btnBuscarID.setText("Buscar");
         btnBuscarID.addActionListener(this::btnBuscarIDActionPerformed);
@@ -250,6 +256,470 @@ public class viewSocios extends javax.swing.JInternalFrame {
             cbxEstado.setSelected(socio.isEstado());
         }
     }//GEN-LAST:event_btnBuscarIDActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        
+        //Verificamos que todos los campos no queden vacios
+        if (txtDni.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI es obligatorio");
+        
+            return;
+        }
+        
+        if (txtNombre.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El nombre es obligatorio");
+            
+            return;
+        
+        }
+        
+        if (txtApellido.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El apellido es obligatorio");
+            
+            return;
+        
+        }
+        
+        if (txtEdad.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "La edad es obligatoria");
+            
+            return;
+        
+        }
+        
+        if (txtGmail.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El correo es obligatorio");
+        
+            return;
+        
+        } 
+        
+        if (txtTelefono.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El teléfono es obligatorio");
+        
+            return;
+            
+        }
+        
+        //Validaciones con los datos esperados en cada campo
+        try {
+            
+            Integer.parseInt(txtDni.getText());
+            
+        } catch (NumberFormatException e) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI debe contener únicamente valores numéricos");
+            
+            return;
+        
+        }
+        
+        //Guardamos el dato nombre obtenido del usuario en una variable
+        String nombre = txtNombre.getText();
+        
+        for (int i = 0; i < nombre.length(); i++) {
+            
+            if (Character.isDigit(nombre.charAt(i))) {
+            
+                JOptionPane.showMessageDialog(null, "El nombre no puede contener números");
+            
+                return;
+            }    
+        }
+        
+        //Guardamos el dato apellido obtenido del usuario en una variable
+        String apellido = txtApellido.getText();
+        
+        for (int i = 0; i < apellido.length(); i++) {
+            
+            if (Character.isDigit(apellido.charAt(i))) {
+            
+                JOptionPane.showMessageDialog(null, "El apellido no puede contener números");
+            
+                return;
+            }    
+        }
+        
+        try {
+            
+            Integer.parseInt(txtEdad.getText());
+            
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(null, "La edad debe contener únicamente valores numéricos");
+        
+            return; 
+        }
+        
+        try {
+            
+            Long.parseLong(txtTelefono.getText());
+            
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(null, "El teléfono debe contener únicamente valores numéricos");
+        
+            return; 
+        }
+        
+        //Guardamos los datos obtenidos del usuario en variables 
+        int dni = Integer.parseInt(txtDni.getText());
+        int edad = Integer.parseInt(txtEdad.getText());
+        String correo = txtGmail.getText();
+        long telefono = Long.parseLong(txtTelefono.getText());
+        boolean estado = cbxEstado.isSelected();
+        
+        //Creamos un nuevo socio con los datos obtenidos
+        Socio socio=new Socio(dni, nombre, apellido, edad, correo, telefono, estado);
+        
+        //Utilizamos el método para guardar el socio en nuestra base de datos
+        sd.agregarSocio(socio);
+        
+        //Luego de guardar el socio en nuestra base de datos reseteamos los campos para poder cargar uno nuevo
+        txtDni.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtEdad.setText("");
+        txtGmail.setText("");
+        txtTelefono.setText("");
+        cbxEstado.setSelected(false);
+        
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        
+        //Recuperamos el dni ingresado por el usuario
+        String dni = txtDni.getText();
+        
+        //Comprobamos que el campo no esté vacio
+        if (txtDni.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI es obligatorio");
+        
+            return;
+        }
+        
+        //Validamos que el DNI contenga los datos correctos
+        try {
+            
+            Integer.parseInt(txtDni.getText());
+            
+        } catch (NumberFormatException e) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI debe contener únicamente valores numéricos");
+            
+            return;
+        
+        }
+        
+        //Usamos el método para buscar socio a través del DNI ingresado
+        Socio socio = sd.buscarSocio(dni);
+        
+        //Comprobamos que el socio a buscar exista
+        if (socio == null) {
+        
+            JOptionPane.showMessageDialog(null, "El socio no existe");
+            
+            return;
+            
+        }
+        
+        //Verificamos que todos los campos no queden vacios
+        if (txtNombre.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El nombre es obligatorio");
+            
+            return;
+        
+        }
+        
+        if (txtApellido.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El apellido es obligatorio");
+            
+            return;
+        
+        }
+        
+        if (txtEdad.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "La edad es obligatoria");
+            
+            return;
+        
+        }
+        
+        if (txtGmail.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El correo es obligatorio");
+        
+            return;
+        
+        } 
+        
+        if (txtTelefono.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El teléfono es obligatorio");
+        
+            return;
+            
+        }
+        
+        //Guardamos el dato nombre obtenido del usuario en una variable
+        String nombre = txtNombre.getText();
+        
+        //Validaciones con los datos esperados en cada campo
+        for (int i = 0; i < nombre.length(); i++) {
+            
+            if (Character.isDigit(nombre.charAt(i))) {
+            
+                JOptionPane.showMessageDialog(null, "El nombre no puede contener números");
+            
+                return;
+            }    
+        }
+        
+        //Guardamos el dato apellido obtenido del usuario en una variable
+        String apellido = txtApellido.getText();
+        
+        for (int i = 0; i < apellido.length(); i++) {
+            
+            if (Character.isDigit(apellido.charAt(i))) {
+            
+                JOptionPane.showMessageDialog(null, "El apellido no puede contener números");
+            
+                return;
+            }    
+        }
+        
+        try {
+            
+            Integer.parseInt(txtEdad.getText());
+            
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(null, "La edad debe contener únicamente valores numéricos");
+        
+            return; 
+        }
+        
+        try {
+            
+            Long.parseLong(txtTelefono.getText());
+            
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(null, "El teléfono debe contener únicamente valores numéricos");
+        
+            return; 
+        }
+        
+        //Guardamos los datos obtenidos del usuario en variables
+        int id = Integer.parseInt(txtID.getText());
+        int dnii = Integer.parseInt(txtDni.getText());
+        int edad = Integer.parseInt(txtEdad.getText());
+        String correo = txtGmail.getText();
+        long telefono = Long.parseLong(txtTelefono.getText());
+        boolean estado = cbxEstado.isSelected();
+        
+        //Creamos un nuevo socio con los datos obtenidos
+        Socio s = new Socio(id, dnii, nombre, apellido, edad, correo, telefono, estado);
+        
+        //Actualizamos el socio con el socio creado
+        sd.ActualizarSocio(s);
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+        //Recuperamos el DNI ingresado por el usuario
+        String dni = txtDni.getText();
+        
+        //Comprobamos que no este vacío
+        if (txtDni.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI es obligatorio");
+        
+            return;
+        }
+        
+        //Validamos que el DNI contenga los datos correctos
+        try {
+            
+            Integer.parseInt(txtDni.getText());
+            
+        } catch (NumberFormatException e) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI debe contener únicamente valores numéricos");
+            
+            return;
+        
+        }
+        
+        //Buscamos el socio
+        Socio socio = sd.buscarSocio(dni);
+        
+        //Comprobamos que exista
+        if (socio == null) {
+        
+            JOptionPane.showMessageDialog(null, "El socio no existe");
+        
+            return;
+            
+        }
+        
+        int respuesta = JOptionPane.showConfirmDialog(
+            null,
+                "¿Estás seguro que deseas eliminar este socio?",
+                "Confirmar eliminacion",
+                JOptionPane.YES_NO_OPTION
+        );
+        
+        if (respuesta == JOptionPane.YES_OPTION) {
+        
+            sd.eliminarSocio(socio.getIdSocio());
+            
+        }
+        
+        //Luego de eliminar el socio en nuestra base de datos reseteamos los campos
+        txtID.setText("");
+        txtDni.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtEdad.setText("");
+        txtGmail.setText("");
+        txtTelefono.setText("");
+        cbxEstado.setSelected(false);
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        
+        //Reseteamos los campos
+        txtDni.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtEdad.setText("");
+        txtGmail.setText("");
+        txtTelefono.setText("");
+        cbxEstado.setSelected(false);
+        
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnBajalogicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajalogicaActionPerformed
+        // TODO add your handling code here:
+        
+        //Recuperamos el DNI ingresado por el usuario
+        String dni = txtDni.getText();
+        
+        //Comprobamos que no este vacío
+        if (txtDni.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI es obligatorio");
+        
+            return;
+        }
+        
+        //Validamos que el DNI contenga los datos correctos
+        try {
+            
+            Integer.parseInt(txtDni.getText());
+            
+        } catch (NumberFormatException e) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI debe contener únicamente valores numéricos");
+            
+            return;
+        
+        }
+        
+        //Buscamos el socio
+        Socio socio = sd.buscarSocio(dni);
+        
+        //Comprobamos que exista
+        if (socio == null) {
+        
+            JOptionPane.showMessageDialog(null, "El socio no existe");
+        
+            return;
+            
+        }
+        
+        if (socio.isEstado()) {
+        
+            socio.setEstado(false);
+        
+            sd.darDeBaja(socio.getDni());
+            
+        } else {
+           
+            JOptionPane.showMessageDialog(null, "El socio ya está dado de baja");
+        
+        }
+        
+    }//GEN-LAST:event_btnBajalogicaActionPerformed
+
+    private void btnAltaLogicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaLogicaActionPerformed
+        // TODO add your handling code here:
+        
+        //Recuperamos el DNI ingresado por el usuario
+        String dni = txtDni.getText();
+        
+        //Comprobamos que no este vacío
+        if (txtDni.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI es obligatorio");
+        
+            return;
+        }
+        
+        //Validamos que el DNI contenga los datos correctos
+        try {
+            
+            Integer.parseInt(txtDni.getText());
+            
+        } catch (NumberFormatException e) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI debe contener únicamente valores numéricos");
+            
+            return;
+        
+        }
+        
+        //Buscamos el socio
+        Socio socio = sd.buscarSocio(dni);
+        
+        //Comprobamos que exista
+        if (socio == null) {
+        
+            JOptionPane.showMessageDialog(null, "El socio no existe");
+        
+            return;
+            
+        }
+        
+        if (!socio.isEstado()) {
+        
+            sd.darDeAlta(socio.getDni());
+        
+        } else {
+        
+            JOptionPane.showMessageDialog(null, "Ya esta dado de alta");
+        
+        }
+        
+    }//GEN-LAST:event_btnAltaLogicaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
