@@ -436,7 +436,7 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
         
         
         } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "el ID debe ser un número válido");
+        JOptionPane.showMessageDialog(this, "el DNI debe ser un número válido");
     }
         
     }//GEN-LAST:event_btnAltaLogicaActionPerformed
@@ -459,7 +459,7 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
         
         
         } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "el ID debe ser un numero valido");
+        JOptionPane.showMessageDialog(this, "el DNI debe ser un numero valido");
     }
         
         
