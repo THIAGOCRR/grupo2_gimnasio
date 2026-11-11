@@ -65,7 +65,7 @@ public class PaseData {
     
     public void actualizarPase(Pase pase) {
     
-        String sql="UPDATE pases SET CantidadEntradas, Fecha_Inicio, Fecha_Fin, Costo WHERE ID_Pase = ?";
+        String sql="UPDATE pases SET CantidadEntradas = ?, Fecha_Inicio = ?, Fecha_Fin = ?, Costo = ? WHERE ID_Pase = ?";
         
         try {
             
@@ -188,7 +188,7 @@ public class PaseData {
             p.setFechaFin(rs.getDate("Fecha_Fin").toLocalDate());
             p.setCosto(rs.getDouble("Costo"));
             p.setEstado(rs.getBoolean("Estado"));
-            
+            pases.add(p);
             }
             
             rs.close();
