@@ -4,17 +4,36 @@
  */
 package views;
 
+import entidades.Pase;
+import entidades.Socio;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import modelo.EntrenadorData;
+import modelo.PaseData;
+import modelo.miConexion;
+import modelo.sociosData;
+
 /**
  *
  * @author crn70
  */
 public class viewPases extends javax.swing.JInternalFrame {
 
+     int idSocio; 
+     
+      private miConexion conexion=new miConexion();
+    
+    private PaseData pa=new PaseData(conexion);
+   private sociosData sd=new sociosData(conexion);
+    
+    
     /**
      * Creates new form viewPases
      */
     public viewPases() {
         initComponents();
+        
+            
     }
 
     /**
@@ -48,19 +67,19 @@ public class viewPases extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnDardeBaja = new javax.swing.JButton();
-        btnDardeAlta = new javax.swing.JButton();
         btnGuardar4 = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
 
         btnGuardar1.setText("Guardar");
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setBackground(new java.awt.Color(204, 204, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel1.setForeground(new java.awt.Color(204, 204, 255));
         jLabel1.setText("Gestion de Pases");
 
-        jPanel1.setBackground(new java.awt.Color(51, 0, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Cantidad de Entradas:");
@@ -147,12 +166,13 @@ public class viewPases extends javax.swing.JInternalFrame {
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 204));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("DNI del Socio: ");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -178,16 +198,12 @@ public class viewPases extends javax.swing.JInternalFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 51, 204));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
 
         btnActualizar.setText("Actualizar");
 
         btnEliminar.setText("Eliminar");
-
-        btnDardeBaja.setText("Dar de Baja");
-
-        btnDardeAlta.setText("Dar de Alta");
 
         btnGuardar4.setText("Guardar");
 
@@ -198,41 +214,28 @@ public class viewPases extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnActualizar))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(btnDardeAlta)))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(btnDardeBaja))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(btnActualizar)
+                .addGap(60, 60, 60)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDardeBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDardeAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -240,18 +243,15 @@ public class viewPases extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(217, 217, 217)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(281, 281, 281)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -264,19 +264,64 @@ public class viewPases extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(9, 9, 9))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        
+    String dniTxt = txtSocioDni.getText().trim();
+    
+    if (dniTxt.isEmpty()) {
+        return;
+    }
+    
+    try {
+        int dni = Integer.parseInt(dniTxt);
+        Socio socio = sd.buscarSocioInt(dni);
+                
+        if (socio != null) {
+            idSocio = socio.getIdSocio();
+          
+            ArrayList<Pase> lista = pa.buscarPasesPorSocio(idSocio);
+            
+            if (lista.size() > 0) {
+                Pase pase = lista.get(0);
+                
+                txtID.setText(String.valueOf(pase.getIdPase()));
+                txtEntradas.setText(String.valueOf(pase.getCantidadPases()));
+                jdcFechaInicio.setDate(java.sql.Date.valueOf(pase.getFechaInicio()));
+                jdcFechaFin.setDate(java.sql.Date.valueOf(pase.getFechaFin()));
+                txtValor.setText(String.valueOf(pase.getCosto()));
+                cbxEstado.setState(pase.isEstado());
+                
+            }
+            
+        } else{
+        
+        JOptionPane.showMessageDialog(this, "no hay un dni de algun socio que sea igual a ese");
+        
+        }
+        
+    }catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "el dni debe ser un numero valido");
+    }
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnDardeAlta;
-    private javax.swing.JButton btnDardeBaja;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar1;
     private javax.swing.JButton btnGuardar4;

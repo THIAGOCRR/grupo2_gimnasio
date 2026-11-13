@@ -34,6 +34,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2Entrenador = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -60,6 +61,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2Entrenador.setText("Entrenador");
         jMenuItem2Entrenador.addActionListener(this::jMenuItem2EntrenadorActionPerformed);
         jMenu2.add(jMenuItem2Entrenador);
+
+        jMenuItem2.setText("Pases del Socio");
+        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
+        jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
 
@@ -120,6 +125,30 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2EntrenadorActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+
+
+   escritorio.removeAll();
+         escritorio.repaint();
+        
+         
+         viewPases pa = new viewPases();
+         escritorio.add(pa);
+        pa.setVisible(true);
+        escritorio.moveToFront(pa);
+
+
+
+
+
+
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -152,6 +181,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem2Entrenador;
     // End of variables declaration//GEN-END:variables
 }

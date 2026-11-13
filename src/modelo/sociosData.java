@@ -132,6 +132,38 @@ public class sociosData {
 
     return socio;
 }
+    /*hice otro Buscar Socio por Int en vez de String para no sabotear la idea de teo, porque al cambiar
+    el metodo este afecta otras partes del codigo que hizo teo y ahora lo necesito de tipo dni para el metodo que estoy armando en paseData*/
+     public Socio buscarSocioInt(int dni) {
+    String sql = "SELECT ID_Socio, DNI, Nombre, Apellido, Edad, Correo, Telefono, Estado FROM socios WHERE DNI = ?";
+
+    Socio socio = null;
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, dni);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            socio = new Socio();
+            socio.setIdSocio(rs.getInt("ID_Socio"));
+            socio.setDni(rs.getInt("DNI"));
+            socio.setNombre(rs.getString("Nombre"));
+            socio.setApellido(rs.getString("Apellido"));
+            socio.setEdad(rs.getInt("Edad"));
+            socio.setCorreo(rs.getString("Correo"));
+            socio.setTelefono(rs.getLong("Telefono"));
+            socio.setEstado(rs.getBoolean("Estado"));
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socios");
+    }
+
+    return socio;
+}
+    
+    
+    
        
     public List<Socio> listarSocios() {
     List<Socio> lista = new ArrayList<>();
