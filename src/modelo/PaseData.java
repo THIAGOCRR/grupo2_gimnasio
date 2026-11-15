@@ -103,7 +103,7 @@ public class PaseData {
     
     public void borrarPase(int idPase) {
     
-    String sql="DELETE FROM pases WHERE ID_Pse = ?";
+    String sql="DELETE FROM pases WHERE ID_Pase = ?";
     
         try {
             

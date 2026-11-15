@@ -204,6 +204,7 @@ public class viewPases extends javax.swing.JInternalFrame {
         btnActualizar.setText("Actualizar");
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
         btnGuardar4.setText("Guardar");
 
@@ -317,6 +318,27 @@ public class viewPases extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+          if (txtID.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese el ID del pase a eliminar");
+        return;
+    }
+        
+        try {
+        int idPase = Integer.parseInt(txtID.getText().trim());
+        
+        pa.borrarPase(idPase);
+        JOptionPane.showMessageDialog(this, "Pase eliminado");
+       
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "ID invalido");
+    }
+        
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
