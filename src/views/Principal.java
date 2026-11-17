@@ -33,8 +33,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2Entrenador = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem2Entrenador = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -51,20 +53,28 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 693, Short.MAX_VALUE)
         );
 
-        jMenu2.setText("File");
+        jMenu2.setText("Socio");
 
         jMenuItem1.setText("Socios");
         jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
         jMenu2.add(jMenuItem1);
 
-        jMenuItem2Entrenador.setText("Entrenador");
-        jMenuItem2Entrenador.addActionListener(this::jMenuItem2EntrenadorActionPerformed);
-        jMenu2.add(jMenuItem2Entrenador);
-
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Edit");
         jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Clases");
+
+        jMenuItem2.setText("Gestión de Clases");
+        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
+        jMenu4.add(jMenuItem2);
+
+        jMenuItem2Entrenador.setText("Entrenador");
+        jMenuItem2Entrenador.addActionListener(this::jMenuItem2EntrenadorActionPerformed);
+        jMenu4.add(jMenuItem2Entrenador);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -120,6 +130,20 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2EntrenadorActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        
+        escritorio.removeAll();
+        escritorio.repaint();
+
+        viewClaseGym cg = new viewClaseGym();
+
+        escritorio.add(cg);
+        cg.setVisible(true);
+        escritorio.moveToFront(cg);
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -150,8 +174,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem2Entrenador;
     // End of variables declaration//GEN-END:variables
 }

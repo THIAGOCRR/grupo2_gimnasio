@@ -4,17 +4,45 @@
  */
 package views;
 
+import entidades.ClaseGym;
+import entidades.Entrenador;
+import java.lang.reflect.Array;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import modelo.ClaseGymData;
+import modelo.EntrenadorData;
+import modelo.miConexion;
+
 /**
  *
  * @author crn70
  */
 public class viewClaseGym extends javax.swing.JInternalFrame {
 
+    private miConexion conexion=new miConexion();
+    
+    private EntrenadorData ed=new EntrenadorData(conexion);
+    
+    private ClaseGymData cgd = new ClaseGymData(conexion);
+    
+    List<Entrenador> listaEntrenadores = ed.listarEntrenadores();
+    
     /**
      * Creates new form viewClaseGym
      */
     public viewClaseGym() {
         initComponents();
+        
+    
+    
+    for (int i = 0; i < listaEntrenadores.size(); i++) {
+
+        cbxEntrenador.addItem(listaEntrenadores.get(i));
+    
+    }
+        
     }
 
     /**
@@ -26,21 +54,590 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        textID = new javax.swing.JTextField();
+        textDisciplina = new javax.swing.JTextField();
+        textHorario = new javax.swing.JTextField();
+        textCapacidad = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        cbEstado = new javax.swing.JCheckBox();
+        cbxEntrenador = new javax.swing.JComboBox<>();
+        btnGuardar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        btnActivar = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 123, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 112, Short.MAX_VALUE)
+        );
+
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 137, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
+
+        jTextField6.setText("jTextField1");
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 510, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 173, Short.MAX_VALUE)
+        );
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Gestión de Clases");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(jLabel1)
+                .addContainerGap(118, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        textID.setEditable(false);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("ID:");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Disciplina:");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("ID Entrenador:");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Horario:");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Capacidad:");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Estado:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbEstado)
+                            .addComponent(textCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textDisciplina)
+                            .addComponent(cbxEntrenador, 0, 131, Short.MAX_VALUE))))
+                .addGap(8, 8, 8))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cbxEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cbEstado))
+                .addContainerGap())
+        );
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
+
+        btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(this::btnNuevoActionPerformed);
+
+        btnEliminar.setText("Desactivar");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
+
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(this::btnSalirActionPerformed);
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
+
+        btnActivar.setText("Activar");
+        btnActivar.addActionListener(this::btnActivarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnSalir)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(63, 63, 63)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(151, 151, 151)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46)
+                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(41, 41, 41)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(btnActivar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(btnBuscar)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActivar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addComponent(btnSalir)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        
+        dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        
+        String nombre = textDisciplina.getText().trim();
+        
+        List<ClaseGym> clasesEncontradas = cgd.buscarClases(nombre);
+        
+        if (clasesEncontradas.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "No se encontraron calses con esa disciplina");
+                
+            return;
+        } 
+        
+        String[] opciones = new String[clasesEncontradas.size()];
+        
+        for (int i = 0; i < opciones.length; i++) {
+            
+            opciones[i] = "Horario: " + clasesEncontradas.get(i).getHorario();
+        }
+        
+        int indiceSeleccionado = JOptionPane.showOptionDialog(
+            null,
+            "Seleccione la clase que desea buscar",
+            "Seleccionar clase",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opciones,
+            opciones[0]);
+        
+        if (indiceSeleccionado == -1) {
+        
+            return;
+        }
+        
+        ClaseGym claseSeleccionada = clasesEncontradas.get(indiceSeleccionado);
+        
+        textID.setText(String.valueOf(claseSeleccionada.getIdClase()));
+        textDisciplina.setText(claseSeleccionada.getNombre());
+        textHorario.setText(claseSeleccionada.getHorario().toString());
+        textCapacidad.setText(String.valueOf(claseSeleccionada.getCapacidad()));
+        cbEstado.setSelected(claseSeleccionada.isEstado());
+        
+        for (int i = 0; i < cbxEntrenador.getItemCount(); i++) {
+
+            Entrenador entrenador = cbxEntrenador.getItemAt(i);
+
+            if (entrenador.getIdEntrenador() == claseSeleccionada.getEntrenador()) {
+
+                cbxEntrenador.setSelectedItem(entrenador);
+                break;
+            }
+        }
+        
+//        else {
+//
+//            JOptionPane.showMessageDialog(null, "No se encontró la clase");
+//        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        
+        textID.setText("");
+        textDisciplina.setText("");
+        cbxEntrenador.setSelectedItem(null);
+        textHorario.setText("");
+        textCapacidad.setText("");
+        cbEstado.setSelected(false);
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        //Validación de disciplina
+        if (textDisciplina.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "La disciplina es obligatoria");
+            
+            return;
+        }
+        
+        if (cbxEntrenador.getSelectedItem() == null) {
+            
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el entrenador");
+        
+            return;
+        }
+        
+        Entrenador entrenadorSeleccionado = (Entrenador) cbxEntrenador.getSelectedItem();
+
+        //Validación de horario
+        if (textHorario.getText().trim().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "El horario es obligatorio");
+            
+            return;
+        }
+        
+        try {
+            
+            LocalTime horario = LocalTime.parse(textHorario.getText());
+        } catch (DateTimeParseException e) {
+        
+            JOptionPane.showMessageDialog(null, "Hora inválida");
+            
+            return;
+        }
+        
+        //Validación de capacidad
+        try {
+            
+            if (textCapacidad.getText().trim().isEmpty()) {
+        
+                JOptionPane.showMessageDialog(null, "La capacidad es obligatoria");
+            
+                return;
+            }
+            
+            int capacidad = Integer.parseInt(textCapacidad.getText().trim());
+            
+            if (capacidad <= 0) {
+                
+                JOptionPane.showMessageDialog(null, "Ingrese una capacidad válida");
+                
+                return;
+            }
+            
+            String nombre = textDisciplina.getText();
+            int idEntrenador = entrenadorSeleccionado.getIdEntrenador();
+            LocalTime horario = LocalTime.parse(textHorario.getText());
+            int laCapacidad = Integer.parseInt(textCapacidad.getText());
+            boolean estado = cbEstado.isSelected();
+            
+            ClaseGym nuevaClase = new ClaseGym(nombre, idEntrenador, horario, laCapacidad, estado); 
+        
+            cgd.guardarClaseGym(nuevaClase);
+        } catch (NumberFormatException e) {
+        
+            JOptionPane.showMessageDialog(null, "La capacidad debe ser un número entero");
+    
+            return;
+        }
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        
+        Entrenador entrenadorSeleccionado = (Entrenador) cbxEntrenador.getSelectedItem();
+
+        if (entrenadorSeleccionado == null) {
+            
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un entrenador");
+            return;
+        }
+        
+        int idClase;
+
+        try {
+            idClase = Integer.parseInt(textID.getText().trim());
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una clase válida");
+        return;
+        }
+        
+        String nombre = textDisciplina.getText().trim();
+
+        if (nombre.isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "La disciplina es obligatoria");
+            return;
+        }
+
+        int idEntrenador = entrenadorSeleccionado.getIdEntrenador();
+
+        if (textHorario.getText().trim().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El horario es obligatorio");
+            return;
+        }
+
+        // Convertir el horario
+        LocalTime horario;
+
+        try {
+            horario = LocalTime.parse(textHorario.getText().trim());
+
+        } catch (DateTimeParseException ex) {
+
+            JOptionPane.showMessageDialog(null, "Ingrese un horario válido (HH:mm)");
+            return;
+        }
+        
+        int laCapacidad;
+
+        try {
+            laCapacidad = Integer.parseInt(textCapacidad.getText().trim());
+
+            if (laCapacidad <= 0) {
+                JOptionPane.showMessageDialog(null, "La capacidad debe ser mayor que cero");
+            return;
+        }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "La capacidad debe ser un número entero");
+            return;
+        }
+        
+        boolean estado = cbEstado.isSelected();
+        
+        ClaseGym claseActualizada = new ClaseGym(idClase, nombre, idEntrenador, horario, laCapacidad, estado);
+        
+        cgd.actualizarClase(claseActualizada);
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+        int idClase = Integer.parseInt(textID.getText());
+
+        int respuesta = JOptionPane.showConfirmDialog(
+            null,
+            "¿Está seguro de que desea desactivar esta clase?",
+            "Confirmar desactivación",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+           
+            cgd.desactivarClase(idClase);
+        }
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
+        // TODO add your handling code here:
+        
+        String nombre = textDisciplina.getText().trim();
+
+        if (nombre.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Ingrese una disciplina");
+
+            return;
+        }
+
+        // Buscar clases inactivas
+        List<ClaseGym> clasesEncontradas = cgd.buscarClasesInactivas(nombre);
+
+        if (clasesEncontradas.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "No se encontraron clases inactivas con esa disciplina");
+
+            return;
+        }
+
+        // Crear opciones para seleccionar una clase
+        String[] opciones = new String[clasesEncontradas.size()];
+
+        for (int i = 0; i < opciones.length; i++) {
+
+            opciones[i] = "Horario: " + clasesEncontradas.get(i).getHorario();
+        }
+
+    // Mostrar ventana de selección
+        int indiceSeleccionado = JOptionPane.showOptionDialog(
+            null,
+            "Seleccione la clase que desea activar",
+            "Activar clase",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opciones,
+            opciones[0]
+        );
+
+        if (indiceSeleccionado == -1) {
+        
+            return;
+        }
+
+        // Recuperar clase seleccionada
+        ClaseGym claseSeleccionada =
+        clasesEncontradas.get(indiceSeleccionado);
+
+        // Confirmar activación
+        int respuesta = JOptionPane.showConfirmDialog(
+            null,
+            "¿Está seguro de que desea activar esta clase?",
+            "Confirmar activación",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+            cgd.activarClase(claseSeleccionada.getIdClase());
+        }
+    }//GEN-LAST:event_btnActivarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActivar;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JCheckBox cbEstado;
+    private javax.swing.JComboBox<Entrenador> cbxEntrenador;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField textCapacidad;
+    private javax.swing.JTextField textDisciplina;
+    private javax.swing.JTextField textHorario;
+    private javax.swing.JTextField textID;
     // End of variables declaration//GEN-END:variables
 }

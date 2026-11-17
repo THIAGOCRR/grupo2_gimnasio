@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,7 +30,7 @@ public class ClaseGymData {
     
     public void guardarClaseGym(ClaseGym claseGym) {
     
-        String sql="SELECT INTO clases(Disciplina, ID_Entrenador, Horario, Capacidad, Estado) VALUES (?, ?, ?, ?, ?)";
+            String sql="INSERT INTO clases(Disciplina, ID_Entrenador, Horario, Capacidad, Estado) VALUES (?, ?, ?, ?, ?)";
     
         try {
             
@@ -44,11 +45,11 @@ public class ClaseGymData {
             
             if (filas > 0) {
             
-                System.out.println("Clase guardada correctamente");
+                JOptionPane.showMessageDialog(null, "Clase guardada correctamente");
             
             } else {
             
-                System.out.println("No se pudo guardar la clase");
+                JOptionPane.showMessageDialog(null, "No se pudo guardar la clase");
             
             }
         
@@ -62,7 +63,7 @@ public class ClaseGymData {
     
     public void actualizarClase(ClaseGym claseGym) {
     
-        String sql="UPDATE clases SET Disciplina = ?, ID_Entrenador = ?, Horario = ?, Capacidad = ? WHERE ID_Clase = ?";
+        String sql="UPDATE clases SET Disciplina = ?, ID_Entrenador = ?, Horario = ?, Capacidad = ?, Estado = ? WHERE ID_Clase = ?";
         
         try {
             
@@ -71,20 +72,22 @@ public class ClaseGymData {
             ps.setInt(2, claseGym.getEntrenador());
             ps.setTime(3, java.sql.Time.valueOf(claseGym.getHorario()));
             ps.setInt(4, claseGym.getCapacidad());
+            ps.setBoolean(5, claseGym.isEstado());
+            ps.setInt(6, claseGym.getIdClase());
             
             int filas=ps.executeUpdate();
             
             if (filas > 0) {
             
-                System.out.println("Clase actualizada correctamente");
+                JOptionPane.showMessageDialog(null, "Clase actualizada correctamente");
                 
             } else if (filas == 0) {
             
-                System.out.println("No se encontro el ID");
+                JOptionPane.showMessageDialog(null, "No se encontro el ID");
             
             } else {
             
-                System.out.println("No se pudo actualizar la clase");
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar la clase");
                 
             }
         
@@ -97,28 +100,29 @@ public class ClaseGymData {
     
     }
     
-    public void borrarClase(int idClase) {
+    public void desactivarClase(int idClase) {
     
-        String sql="DELETE FROM clases WHERE ID_Clase = ?";
+        String sql="UPDATE clases SET Estado = ? WHERE ID_Clase = ?";
         
         try {
             
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, idClase);
+            ps.setBoolean(1, false);
+            ps.setInt(2, idClase);
             
             int filas=ps.executeUpdate();
             
             if (filas > 0) {
             
-                System.out.println("Clase borrada correctamente");
+                JOptionPane.showMessageDialog(null, "Clase desactivada correctamente");
                 
             } else if (filas == 0) {
             
-                System.out.println("No se encontro el ID");
+                JOptionPane.showMessageDialog(null, "No se encontró la clase");
             
             } else {
             
-                System.out.println("No se pudo borrar la clase");
+                JOptionPane.showMessageDialog(null, "No se pudo desactivar la clase");
                 
             }
             
@@ -131,29 +135,102 @@ public class ClaseGymData {
         
     }
     
-    public ClaseGym buscarClase(int idClase) {
+    public void activarClase(int idClase) {
+
+        String sql = "UPDATE clases SET Estado = ? WHERE ID_Clase = ?";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setBoolean(1, true);
+            ps.setInt(2, idClase);
+
+            int filas = ps.executeUpdate();
+
+            if (filas > 0) {
+
+            JOptionPane.showMessageDialog(null, "Clase activada correctamente");
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "No se encontró la clase inactiva");
+        }
+
+        ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al intentar activar la clase: " + ex.getMessage());
+        }
+    }
     
-        ClaseGym cg=null;
+    public List<ClaseGym> buscarClasesInactivas(String nombre) {
+
+        List<ClaseGym> clasesEncontradas = new ArrayList<>();
+
+        String sql = "SELECT * FROM clases WHERE Disciplina = ? AND Estado = false";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+
+            ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+
+            ClaseGym cg = new ClaseGym();
+
+            cg.setIdClase(rs.getInt("ID_Clase"));
+            cg.setNombre(rs.getString("Disciplina"));
+            cg.setEntrenador(rs.getInt("ID_Entrenador"));
+            cg.setHorario(rs.getTime("Horario").toLocalTime());
+            cg.setCapacidad(rs.getInt("Capacidad"));
+            cg.setEstado(rs.getBoolean("Estado"));
+
+            clasesEncontradas.add(cg);
+        }
+
+        rs.close();
+        ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al buscar clases inactivas: " + ex.getMessage());
+        }
+
+        return clasesEncontradas;
+    }
+    
+    public List<ClaseGym> buscarClases(String nombre) {
+    
+        List<ClaseGym> clasesEncontradas = new ArrayList<>();
         
-        String sql="SELECT * FROM clases WHERE ID_Clase = ?";
+        
+        
+        String sql = "SELECT * FROM clases WHERE Disciplina = ? AND Estado = true";
         
         try {
             
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, idClase);
+            ps.setString(1, nombre);
             
             ResultSet rs=ps.executeQuery();
             
-            if (rs.next()) {
+            while (rs.next()) {
             
-                cg=new ClaseGym();
-                cg.setNombre(rs.getString("Capacidad"));
+                ClaseGym cg = new ClaseGym();
+                
+                cg.setIdClase(rs.getInt("ID_Clase"));
+                cg.setNombre(rs.getString("Disciplina"));
                 cg.setEntrenador(rs.getInt("ID_Entrenador"));
+                
                 cg.setHorario(rs.getTime("Horario").toLocalTime());
                 cg.setCapacidad(rs.getInt("Capacidad"));
                 cg.setEstado(rs.getBoolean("Estado"));
 
-                System.out.println("Clase encontrada");
+                clasesEncontradas.add(cg);
             }
         
             rs.close();
@@ -163,7 +240,7 @@ public class ClaseGymData {
             JOptionPane.showMessageDialog(null, "Error al buscar la clase " + ex.getMessage());
             
         }
-        return cg;
+        return clasesEncontradas;
     }
     
     public ArrayList<ClaseGym> listarClase() {

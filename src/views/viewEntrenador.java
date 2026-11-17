@@ -489,7 +489,7 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
         
         
         
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
