@@ -305,7 +305,18 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
         txtID.setText("");
                   
                   
-                  
+                    /* alternativa mucho mas sencilla que hacer metodos con botones de baja logica y alta logica 
+           voy a usar los botones en esta gui pero en la siguiente probare esto mejor
+        
+ boolean Activo = cbxEstado.isSelected(); 
+
+if (Activo) {
+    en.altaLogica(dni);
+} else {
+    en.bajaLogica(dni);
+}
+
+*/
                   
                   
         
