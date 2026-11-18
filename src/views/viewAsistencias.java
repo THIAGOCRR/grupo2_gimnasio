@@ -3,21 +3,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package views;
+import entidades.Asistencia;
+import entidades.ClaseGym;
+import entidades.Socio;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.AsistenciaData;
+import modelo.ClaseGymData;
+import modelo.miConexion;
+import modelo.sociosData;
 /**
  *
  * @author crn70
  */
 public class viewAsistencias extends javax.swing.JInternalFrame {
- private DefaultTableModel modelo;
-   
 
-    /**
-     * Creates new form viewAsistencias
-     */
+    private DefaultTableModel modelo;
+
+    private miConexion conexion;
+    private sociosData sd;
+    private AsistenciaData ad;
+    private ClaseGymData cgd;
+
     public viewAsistencias() {
+
+        conexion = new miConexion();
+        sd = new sociosData(conexion);
+        ad = new AsistenciaData(conexion);
+        cgd = new ClaseGymData(conexion);
+
         initComponents();
         cargarCabecera();
     }
@@ -38,6 +55,7 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtSocio = new javax.swing.JTextField();
         btnSalir = new javax.swing.JToggleButton();
+        btnBuscar = new javax.swing.JButton();
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 204, 204));
 
@@ -62,12 +80,17 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
         jLabel2.setText("DNI del Socio Registrado: ");
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(this::btnSalirActionPerformed);
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(txtSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btnSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(btnBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -85,7 +108,9 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscar)))))
                 .addContainerGap(89, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -100,7 +125,8 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
@@ -121,6 +147,69 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        
+        modelo.setRowCount(0);
+        
+        if (txtSocio.getText().isEmpty()) {
+        
+            JOptionPane.showMessageDialog(null, "El DNI es obligatorio");
+            
+            return;
+        }
+        
+        int dni;
+        
+        try {
+            
+            dni = Integer.parseInt(txtSocio.getText());
+        } catch (NumberFormatException e) {
+        
+            JOptionPane.showMessageDialog(null, "Ingrese valores numéricos");
+            
+            return;
+        }
+        
+        
+        Socio socio = sd.buscarSocioInt(dni);
+        
+        if (socio != null) {
+            
+            int idSocio = socio.getIdSocio();
+            
+            ArrayList<Asistencia> listaDeAsistencias = ad.listarAsistenciasPorSocio(idSocio);
+            
+            if (listaDeAsistencias.isEmpty()) {
+    
+                JOptionPane.showMessageDialog(null, "El socio no registra asistencias");
+            } else {
+                
+                for (Asistencia asistencia : listaDeAsistencias) {
+
+                    ClaseGym clase = cgd.buscarClasePorId(asistencia.getClase());
+                
+                    modelo.addRow(new Object[] {
+                    asistencia.getIdAsistencia(),
+                    socio.getNombre(),
+                    clase.getNombre(),
+                    asistencia.getFechaAsistencia(),
+                    });
+                } 
+            }
+            
+        } else {
+            
+            JOptionPane.showMessageDialog(null, "El socio no existe");
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        
+        dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
  
     
     private void cargarCabecera(){   
@@ -133,6 +222,7 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
      }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JToggleButton btnSalir;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;

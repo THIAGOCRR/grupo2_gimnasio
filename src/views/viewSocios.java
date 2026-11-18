@@ -307,8 +307,7 @@ public class viewSocios extends javax.swing.JInternalFrame {
             return;
             
         }
-        
-        //Validaciones con los datos esperados en cada campo
+
         try {
             
             Integer.parseInt(txtDni.getText());
@@ -320,8 +319,7 @@ public class viewSocios extends javax.swing.JInternalFrame {
             return;
         
         }
-        
-        //Guardamos el dato nombre obtenido del usuario en una variable
+
         String nombre = txtNombre.getText();
         
         for (int i = 0; i < nombre.length(); i++) {
@@ -333,8 +331,7 @@ public class viewSocios extends javax.swing.JInternalFrame {
                 return;
             }    
         }
-        
-        //Guardamos el dato apellido obtenido del usuario en una variable
+
         String apellido = txtApellido.getText();
         
         for (int i = 0; i < apellido.length(); i++) {
@@ -368,21 +365,17 @@ public class viewSocios extends javax.swing.JInternalFrame {
         
             return; 
         }
-        
-        //Guardamos los datos obtenidos del usuario en variables 
+ 
         int dni = Integer.parseInt(txtDni.getText());
         int edad = Integer.parseInt(txtEdad.getText());
         String correo = txtGmail.getText();
         long telefono = Long.parseLong(txtTelefono.getText());
         boolean estado = cbxEstado.isSelected();
-        
-        //Creamos un nuevo socio con los datos obtenidos
+
         Socio socio=new Socio(dni, nombre, apellido, edad, correo, telefono, estado);
-        
-        //Utilizamos el método para guardar el socio en nuestra base de datos
+
         sd.agregarSocio(socio);
-        
-        //Luego de guardar el socio en nuestra base de datos reseteamos los campos para poder cargar uno nuevo
+
         txtDni.setText("");
         txtNombre.setText("");
         txtApellido.setText("");

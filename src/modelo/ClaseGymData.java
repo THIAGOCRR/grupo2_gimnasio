@@ -243,6 +243,35 @@ public class ClaseGymData {
         return clasesEncontradas;
     }
     
+    public ClaseGym buscarClasePorId(int idClase) {
+
+        ClaseGym clase = null;
+        
+        String sql = "SELECT * FROM clases WHERE ID_Clase = ?";
+        
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idClase);
+            
+            ResultSet rs=ps.executeQuery();
+            
+            if (rs.next()) {
+            
+                clase = new ClaseGym();
+                clase.setIdClase(rs.getInt("ID_Clase"));
+                clase.setNombre(rs.getString("Disciplina"));
+            }
+            
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "No se pudo obtener la clase");
+        }
+        return clase;
+    }
+    
     public ArrayList<ClaseGym> listarClase() {
     
         String sql="SELECT * FROM clases";

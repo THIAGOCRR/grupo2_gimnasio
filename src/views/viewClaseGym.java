@@ -246,12 +246,13 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnSalir)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(63, 63, 63)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(151, 151, 151)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSalir)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(151, 151, 151))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -287,9 +288,8 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
                         .addComponent(btnBuscar)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -363,11 +363,6 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
                 break;
             }
         }
-        
-//        else {
-//
-//            JOptionPane.showMessageDialog(null, "No se encontró la clase");
-//        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -383,7 +378,7 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        //Validación de disciplina
+        
         if (textDisciplina.getText().isEmpty()) {
         
             JOptionPane.showMessageDialog(null, "La disciplina es obligatoria");
@@ -400,7 +395,6 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
         
         Entrenador entrenadorSeleccionado = (Entrenador) cbxEntrenador.getSelectedItem();
 
-        //Validación de horario
         if (textHorario.getText().trim().isEmpty()) {
             
             JOptionPane.showMessageDialog(null, "El horario es obligatorio");
@@ -417,8 +411,7 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
             
             return;
         }
-        
-        //Validación de capacidad
+
         try {
             
             if (textCapacidad.getText().trim().isEmpty()) {
@@ -492,7 +485,6 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
             return;
         }
 
-        // Convertir el horario
         LocalTime horario;
 
         try {
@@ -557,7 +549,6 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
             return;
         }
 
-        // Buscar clases inactivas
         List<ClaseGym> clasesEncontradas = cgd.buscarClasesInactivas(nombre);
 
         if (clasesEncontradas.isEmpty()) {
@@ -567,7 +558,6 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
             return;
         }
 
-        // Crear opciones para seleccionar una clase
         String[] opciones = new String[clasesEncontradas.size()];
 
         for (int i = 0; i < opciones.length; i++) {
@@ -575,7 +565,6 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
             opciones[i] = "Horario: " + clasesEncontradas.get(i).getHorario();
         }
 
-    // Mostrar ventana de selección
         int indiceSeleccionado = JOptionPane.showOptionDialog(
             null,
             "Seleccione la clase que desea activar",
@@ -592,11 +581,9 @@ public class viewClaseGym extends javax.swing.JInternalFrame {
             return;
         }
 
-        // Recuperar clase seleccionada
         ClaseGym claseSeleccionada =
         clasesEncontradas.get(indiceSeleccionado);
 
-        // Confirmar activación
         int respuesta = JOptionPane.showConfirmDialog(
             null,
             "¿Está seguro de que desea activar esta clase?",
