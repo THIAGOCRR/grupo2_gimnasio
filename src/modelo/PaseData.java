@@ -13,7 +13,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 
-/**
+/** 
  *
  * @author crn70
  */
@@ -30,7 +30,7 @@ public class PaseData {
     
     public void guardarPase(Pase pase) {
         
-        String sql="SELECT INTO pases(ID_Socio, CantidadEntradas, Fecha_Inicio, Fecha_Fin, Costo, Estado) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql="INSERT INTO pases (ID_Socio, CantidadEntradas, Fecha_Inicio, Fecha_Fin, Costo, Estado) VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
             
@@ -65,7 +65,7 @@ public class PaseData {
     
     public void actualizarPase(Pase pase) {
     
-        String sql="UPDATE pases SET CantidadEntradas = ?, Fecha_Inicio = ?, Fecha_Fin = ?, Costo = ? WHERE ID_Pase = ?";
+String sql = "UPDATE pases SET CantidadEntradas=?, Fecha_Inicio=?, Fecha_Fin=?, Costo=?, Estado=? WHERE ID_Pase=?";
         
         try {
             
@@ -74,7 +74,8 @@ public class PaseData {
             ps.setDate(2, java.sql.Date.valueOf(pase.getFechaInicio()));
             ps.setDate(3, java.sql.Date.valueOf(pase.getFechaFin()));
             ps.setDouble(4, pase.getCosto());
-            
+             ps.setBoolean(5, pase.isEstado());    
+        ps.setInt(6, pase.getIdPase());
             int filas=ps.executeUpdate();
             
             if (filas > 0) {

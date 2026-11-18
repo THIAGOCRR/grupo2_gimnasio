@@ -20,7 +20,7 @@ import modelo.sociosData;
 public class viewPases extends javax.swing.JInternalFrame {
 
      int idSocio; 
-     
+      int idPase;
       private miConexion conexion=new miConexion();
     
     private PaseData pa=new PaseData(conexion);
@@ -32,8 +32,10 @@ public class viewPases extends javax.swing.JInternalFrame {
      */
     public viewPases() {
         initComponents();
-        
-            
+        idSocio = -1;
+         int idPase = -1;
+            txtID.setEnabled(false);
+txtID.setEditable(false);
     }
 
     /**
@@ -202,13 +204,16 @@ public class viewPases extends javax.swing.JInternalFrame {
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
         btnGuardar4.setText("Guardar");
+        btnGuardar4.addActionListener(this::btnGuardar4ActionPerformed);
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(this::btnNuevoActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -283,16 +288,17 @@ public class viewPases extends javax.swing.JInternalFrame {
     
     try {
         int dni = Integer.parseInt(dniTxt);
+        
         Socio socio = sd.buscarSocioInt(dni);
                 
         if (socio != null) {
-            idSocio = socio.getIdSocio();
-          
+       idSocio = socio.getIdSocio(); 
+       idPase = -1;
             ArrayList<Pase> lista = pa.buscarPasesPorSocio(idSocio);
             
             if (lista.size() > 0) {
                 Pase pase = lista.get(0);
-                
+                idPase = pase.getIdPase();
                 txtID.setText(String.valueOf(pase.getIdPase()));
                 txtEntradas.setText(String.valueOf(pase.getCantidadPases()));
                 jdcFechaInicio.setDate(java.sql.Date.valueOf(pase.getFechaInicio()));
@@ -300,16 +306,24 @@ public class viewPases extends javax.swing.JInternalFrame {
                 txtValor.setText(String.valueOf(pase.getCosto()));
                 cbxEstado.setState(pase.isEstado());
                 
-            }
             
+            
+            
+        } 
+        else {
+       
+                JOptionPane.showMessageDialog(this, 
+                    "el socio no tiene pases.");
+        }
+        
         } else{
         
-        JOptionPane.showMessageDialog(this, "no hay un dni de algun socio que sea igual a ese");
+        JOptionPane.showMessageDialog(this, "No hay un DNI de algun socio que sea igual a ese");
         
         }
         
     }catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "el dni debe ser un numero valido");
+        JOptionPane.showMessageDialog(this, "El DNI debe ser un numero valido");
     }
         
         
@@ -323,6 +337,7 @@ public class viewPases extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
           if (txtID.getText().trim().isEmpty()) {
+              
         JOptionPane.showMessageDialog(this, "Ingrese el ID del pase a eliminar");
         return;
     }
@@ -339,6 +354,200 @@ public class viewPases extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+           try {
+        if (txtSocioDni.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "debes buscar el dni de un socio antes");
+            return;
+            
+         
+        }
+        if (txtEntradas.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "ingrese la cantidad de entradas");
+            return;
+            
+            
+        }
+        if (txtValor.getText().trim().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "ingrese el valor del pase");
+            return;
+            
+            
+        }
+       
+        if (jdcFechaInicio.getDate() == null || jdcFechaFin.getDate() == null) {
+            
+            JOptionPane.showMessageDialog(this, "seleccione las fechas");
+            return;
+            
+            
+        }
+         int cantidad = Integer.parseInt(txtEntradas.getText().trim());
+        double costo = Double.parseDouble(txtValor.getText().trim());
+        
+        /* intente convertir esto a date de base de datos(sql) en vez de localdate 
+        
+        java.util.Date utilInicio = jdcFechaInicio.getDate();
+        java.sql.Date fechaInicio = new java.sql.Date(utilInicio.getTime());
+        
+        java.util.Date utilFin = jdcFechaFin.getDate();
+        java.sql.Date fechaFin = new java.sql.Date(utilFin.getTime());
+        
+        */
+        
+        java.util.Date Inicio = jdcFechaInicio.getDate();
+        java.sql.Date sqlInicio = new java.sql.Date(Inicio.getTime());
+        java.time.LocalDate fechaInicio = sqlInicio.toLocalDate();
+        
+        java.util.Date Fin = jdcFechaFin.getDate();
+        java.sql.Date sqlFin = new java.sql.Date(Fin.getTime());
+        java.time.LocalDate fechaFin = sqlFin.toLocalDate();
+        
+        
+        Pase pase = new Pase();
+        pase.setIdPase(idPase);
+        pase.setSocio(idSocio);
+        pase.setCantidadPases(cantidad);
+        pase.setFechaInicio(fechaInicio);
+        pase.setFechaFin(fechaFin);
+        pase.setCosto(costo);
+        pase.setEstado(cbxEstado.getState());
+        
+        
+        pa.actualizarPase(pase);
+        JOptionPane.showMessageDialog(this, "pase actualizado exitosamente");
+     
+        
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "revise que los numeros sean correctos");
+        
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "error al procesar la informacion: " + e.getMessage());
+        
+    }
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnGuardar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar4ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        try {
+        if (idSocio == -1) {
+            
+            JOptionPane.showMessageDialog(this, "primero busque un socio por DNI");
+            
+            return;
+            
+            
+        }
+            
+        if (txtEntradas.getText().trim().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "ingrese la cantidad de entradas");
+            
+            return;
+            
+            
+        }
+        
+        
+        if (txtValor.getText().trim().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "ingrese el valor del pase");
+            return;
+        }
+        
+        
+        if (jdcFechaInicio.getDate() == null || jdcFechaFin.getDate() == null) {
+            
+            JOptionPane.showMessageDialog(this, "seleccione las fechas");
+            return;
+        }
+        
+        
+        
+        int cantidad = Integer.parseInt(txtEntradas.getText().trim());
+        double costo = Double.parseDouble(txtValor.getText().trim());
+        
+    
+        java.util.Date Inicio = jdcFechaInicio.getDate();
+        java.sql.Date sqlInicio = new java.sql.Date(Inicio.getTime());
+        java.time.LocalDate fechaInicio = sqlInicio.toLocalDate();
+        
+        java.util.Date utilFin = jdcFechaFin.getDate();
+        java.sql.Date sqlFin = new java.sql.Date(utilFin.getTime());
+        java.time.LocalDate fechaFin = sqlFin.toLocalDate();
+        
+     
+        Pase nuevoPase = new Pase();
+        nuevoPase.setSocio(idSocio);
+        nuevoPase.setCantidadPases(cantidad);
+        nuevoPase.setFechaInicio(fechaInicio);
+        nuevoPase.setFechaFin(fechaFin);
+        nuevoPase.setCosto(costo);
+        nuevoPase.setEstado(cbxEstado.getState());
+        
+        /*
+        boolean activo = cbxEstado.getState();
+
+if (activo) {
+  
+    nuevoPase.setEstado(true);
+} else {
+    
+    nuevoPase.setEstado(false);
+}
+        */
+       
+        pa.guardarPase(nuevoPase);
+        
+     JOptionPane.showMessageDialog(null, "pase guardado correctamente");
+        
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "revise que los atributos sean correctos");
+    }
+        
+        catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "error: " + e.getMessage());
+    }
+
+    
+        /*al ser auto_increment el idPase la base de datos asume que debe poner un numero que no se repita asi evita errores
+        por lo que puse en el initcomponents que se desactive el idPases  */
+    
+        
+        
+        
+
+        
+        
+        
+       
+        
+
+        
+        
+    }//GEN-LAST:event_btnGuardar4ActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        
+        txtSocioDni.setText("");
+txtID.setText("");
+txtEntradas.setText("");
+jdcFechaInicio.setDate(null);
+jdcFechaFin.setDate(null);
+txtValor.setText("");
+cbxEstado.setState(true);
+JOptionPane.showMessageDialog(this, "pase nuevo");
+        
+        
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -367,4 +576,5 @@ public class viewPases extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSocioDni;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
+
 }
