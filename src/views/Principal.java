@@ -33,13 +33,12 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2Entrenador = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem2Entrenador = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -49,11 +48,11 @@ public class Principal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 722, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 693, Short.MAX_VALUE)
+            .addGap(0, 780, Short.MAX_VALUE)
         );
 
         jMenu2.setText("Socio");
@@ -61,19 +60,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1.setText("Socios");
         jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
         jMenu2.add(jMenuItem1);
-
-
-        jMenuItem2Entrenador.setText("Entrenador");
-        jMenuItem2Entrenador.addActionListener(this::jMenuItem2EntrenadorActionPerformed);
-        jMenu2.add(jMenuItem2Entrenador);
-
-        jMenuItem2.setText("Pases del Socio");
-        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
-        jMenu2.add(jMenuItem2);
-
-        jMenuItem3.setText("Asistencias");
-        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
-        jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
 
@@ -89,6 +75,14 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2Entrenador.setText("Entrenador");
         jMenuItem2Entrenador.addActionListener(this::jMenuItem2EntrenadorActionPerformed);
         jMenu4.add(jMenuItem2Entrenador);
+
+        jMenuItem4.setText("Pases del Socio");
+        jMenuItem4.addActionListener(this::jMenuItem2ActionPerformed);
+        jMenu4.add(jMenuItem4);
+
+        jMenuItem3.setText("Asistencias");
+        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
+        jMenu4.add(jMenuItem3);
 
         jMenuBar1.add(jMenu4);
 
@@ -224,5 +218,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem2Entrenador;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }
