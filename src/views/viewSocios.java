@@ -662,11 +662,9 @@ public class viewSocios extends javax.swing.JInternalFrame {
             return;
         
         }
-        
-        //Buscamos el socio
+
         Socio socio = sd.buscarSocio(dni);
-        
-        //Comprobamos que exista
+
         if (socio == null) {
         
             JOptionPane.showMessageDialog(null, "El socio no existe");
