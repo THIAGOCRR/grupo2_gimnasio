@@ -102,11 +102,10 @@ public class EntrenadorData {
     }
      
      
-     public void eliminarEntrenador(int id){
-     /*
-         
+      public void eliminarEntrenador(int id){
+      /*
          Borrar de manera logica (es decir que no sea visible pero sigue ahi tan solo que no con el estado en 1 sino en 0) como lo hizo el profe en su video: 
-         
+         */
      String sql = "UPDATE entrenadores SET Estado = 0 WHERE ID_Entrenador = ?";
      
      
@@ -131,10 +130,12 @@ public class EntrenadorData {
              
              
      }
-*/
+
+    
     /* Eliminar de manera permanente haciendo que desaparezca de la tabla entrenadores:
      
      */
+    /*
     String sql = "DELETE FROM entrenadores WHERE ID_Entrenador = ?";
 
     try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -145,6 +146,8 @@ public class EntrenadorData {
         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla entrenador");
     }
 }
+     */
+     } 
      
              
      
