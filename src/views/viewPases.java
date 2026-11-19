@@ -20,7 +20,7 @@ import modelo.sociosData;
 public class viewPases extends javax.swing.JInternalFrame {
 
      int idSocio; 
-     
+      int idPase;
       private miConexion conexion=new miConexion();
     
     private PaseData pa=new PaseData(conexion);
@@ -32,8 +32,10 @@ public class viewPases extends javax.swing.JInternalFrame {
      */
     public viewPases() {
         initComponents();
-        
-            
+        idSocio = -1;
+         int idPase = -1;
+            txtID.setEnabled(false);
+txtID.setEditable(false);
     }
 
     /**
@@ -46,6 +48,7 @@ public class viewPases extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnGuardar1 = new javax.swing.JButton();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -60,6 +63,7 @@ public class viewPases extends javax.swing.JInternalFrame {
         txtValor = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         cbxEstado = new java.awt.Checkbox();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtSocioDni = new javax.swing.JTextField();
@@ -73,6 +77,8 @@ public class viewPases extends javax.swing.JInternalFrame {
         btnGuardar1.setText("Guardar");
 
         setBackground(new java.awt.Color(255, 255, 255));
+
+        jDesktopPane1.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -102,6 +108,9 @@ public class viewPases extends javax.swing.JInternalFrame {
         cbxEstado.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
         cbxEstado.setLabel("Activo");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/7090891.png"))); // NOI18N
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,19 +127,24 @@ public class viewPases extends javax.swing.JInternalFrame {
                         .addComponent(jLabel8)
                         .addGap(13, 13, 13)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtEntradas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jdcFechaInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jdcFechaFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtValor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(170, 170, 170))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEntradas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jdcFechaInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jdcFechaFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtValor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(170, 170, 170))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,8 +176,9 @@ public class viewPases extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
@@ -171,6 +186,8 @@ public class viewPases extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("DNI del Socio: ");
 
+        btnBuscar.setBackground(new java.awt.Color(204, 204, 255));
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-acercar-48.png"))); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
@@ -185,7 +202,7 @@ public class viewPases extends javax.swing.JInternalFrame {
                 .addComponent(txtSocioDni, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(btnBuscar)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,79 +211,106 @@ public class viewPases extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSocioDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
 
+        btnActualizar.setBackground(new java.awt.Color(204, 204, 255));
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-aprobar-y-actualizar-48.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
+        btnEliminar.setBackground(new java.awt.Color(204, 204, 255));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
+        btnGuardar4.setBackground(new java.awt.Color(204, 204, 255));
+        btnGuardar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         btnGuardar4.setText("Guardar");
+        btnGuardar4.addActionListener(this::btnGuardar4ActionPerformed);
 
+        btnNuevo.setBackground(new java.awt.Color(204, 204, 255));
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-delete-64.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(this::btnNuevoActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(20, 20, 20)
+                .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnActualizar)
-                .addGap(60, 60, 60)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50))
+                        .addComponent(btnActualizar)
+                        .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(281, 281, 281)))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
 
         pack();
@@ -283,16 +327,17 @@ public class viewPases extends javax.swing.JInternalFrame {
     
     try {
         int dni = Integer.parseInt(dniTxt);
+        
         Socio socio = sd.buscarSocioInt(dni);
                 
         if (socio != null) {
-            idSocio = socio.getIdSocio();
-          
+       idSocio = socio.getIdSocio(); 
+       idPase = -1;
             ArrayList<Pase> lista = pa.buscarPasesPorSocio(idSocio);
             
             if (lista.size() > 0) {
                 Pase pase = lista.get(0);
-                
+                idPase = pase.getIdPase();
                 txtID.setText(String.valueOf(pase.getIdPase()));
                 txtEntradas.setText(String.valueOf(pase.getCantidadPases()));
                 jdcFechaInicio.setDate(java.sql.Date.valueOf(pase.getFechaInicio()));
@@ -300,16 +345,24 @@ public class viewPases extends javax.swing.JInternalFrame {
                 txtValor.setText(String.valueOf(pase.getCosto()));
                 cbxEstado.setState(pase.isEstado());
                 
-            }
             
+            
+            
+        } 
+        else {
+       
+                JOptionPane.showMessageDialog(this, 
+                    "el socio no tiene pases.");
+        }
+        
         } else{
         
-        JOptionPane.showMessageDialog(this, "no hay un dni de algun socio que sea igual a ese");
+        JOptionPane.showMessageDialog(this, "No hay un DNI de algun socio que sea igual a ese");
         
         }
         
     }catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "el dni debe ser un numero valido");
+        JOptionPane.showMessageDialog(this, "El DNI debe ser un numero valido");
     }
         
         
@@ -323,6 +376,7 @@ public class viewPases extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
           if (txtID.getText().trim().isEmpty()) {
+              
         JOptionPane.showMessageDialog(this, "Ingrese el ID del pase a eliminar");
         return;
     }
@@ -340,6 +394,205 @@ public class viewPases extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+           try {
+        if (txtSocioDni.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "debes buscar el dni de un socio antes");
+            return;
+            
+         
+        }
+        if (txtEntradas.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "ingrese la cantidad de entradas");
+            return;
+            
+            
+        }
+        if (txtValor.getText().trim().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "ingrese el valor del pase");
+            return;
+            
+            
+        }
+       
+        if (jdcFechaInicio.getDate() == null || jdcFechaFin.getDate() == null) {
+            
+            JOptionPane.showMessageDialog(this, "seleccione las fechas");
+            return;
+            
+            
+        }
+         int cantidad = Integer.parseInt(txtEntradas.getText().trim());
+        double costo = Double.parseDouble(txtValor.getText().trim());
+        
+        /* intente convertir esto a date de base de datos(sql) en vez de localdate 
+        
+        java.util.Date utilInicio = jdcFechaInicio.getDate();
+        java.sql.Date fechaInicio = new java.sql.Date(utilInicio.getTime());
+        
+        java.util.Date utilFin = jdcFechaFin.getDate();
+        java.sql.Date fechaFin = new java.sql.Date(utilFin.getTime());
+        
+        */
+        
+        java.util.Date Inicio = jdcFechaInicio.getDate();
+        java.sql.Date sqlInicio = new java.sql.Date(Inicio.getTime());
+        java.time.LocalDate fechaInicio = sqlInicio.toLocalDate();
+        
+        java.util.Date Fin = jdcFechaFin.getDate();
+        java.sql.Date sqlFin = new java.sql.Date(Fin.getTime());
+        java.time.LocalDate fechaFin = sqlFin.toLocalDate();
+        
+        
+        Pase pase = new Pase();
+        pase.setIdPase(idPase);
+        pase.setSocio(idSocio);
+        pase.setCantidadPases(cantidad);
+        pase.setFechaInicio(fechaInicio);
+        pase.setFechaFin(fechaFin);
+        pase.setCosto(costo);
+        pase.setEstado(cbxEstado.getState());
+        
+        
+        pa.actualizarPase(pase);
+        JOptionPane.showMessageDialog(this, "pase actualizado exitosamente");
+     
+        
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "revise que los numeros sean correctos");
+        
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "error al procesar la informacion: " + e.getMessage());
+        
+    }
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnGuardar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar4ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        try {
+        if (idSocio == -1) {
+            
+            JOptionPane.showMessageDialog(this, "primero busque un socio por DNI");
+            
+            return;
+            
+            
+        }
+            
+        if (txtEntradas.getText().trim().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "ingrese la cantidad de entradas");
+            
+            return;
+            
+            
+        }
+        
+        
+        if (txtValor.getText().trim().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "ingrese el valor del pase");
+            return;
+        }
+        
+        
+        if (jdcFechaInicio.getDate() == null || jdcFechaFin.getDate() == null) {
+            
+            JOptionPane.showMessageDialog(this, "seleccione las fechas");
+            return;
+        }
+        
+        
+        
+        int cantidad = Integer.parseInt(txtEntradas.getText().trim());
+        double costo = Double.parseDouble(txtValor.getText().trim());
+        
+    
+        java.util.Date Inicio = jdcFechaInicio.getDate();
+        java.sql.Date sqlInicio = new java.sql.Date(Inicio.getTime());
+        java.time.LocalDate fechaInicio = sqlInicio.toLocalDate();
+        
+        java.util.Date utilFin = jdcFechaFin.getDate();
+        java.sql.Date sqlFin = new java.sql.Date(utilFin.getTime());
+        java.time.LocalDate fechaFin = sqlFin.toLocalDate();
+        
+     
+        Pase nuevoPase = new Pase();
+        nuevoPase.setSocio(idSocio);
+        nuevoPase.setCantidadPases(cantidad);
+        nuevoPase.setFechaInicio(fechaInicio);
+        nuevoPase.setFechaFin(fechaFin);
+        nuevoPase.setCosto(costo);
+        nuevoPase.setEstado(cbxEstado.getState());
+        
+        /*
+        boolean activo = cbxEstado.getState();
+
+if (activo) {
+  
+    nuevoPase.setEstado(true);
+} else {
+    
+    nuevoPase.setEstado(false);
+}
+        */
+       
+        pa.guardarPase(nuevoPase);
+        
+     JOptionPane.showMessageDialog(null, "pase guardado correctamente");
+        
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "revise que los atributos sean correctos");
+    }
+        
+        catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "error: " + e.getMessage());
+    }
+
+    
+        /*al ser auto_increment el idPase la base de datos asume que debe poner un numero que no se repita asi evita errores
+        por lo que puse en el initcomponents que se desactive el idPases  */
+    
+        
+        
+        
+
+        
+        
+        
+       
+        
+
+        
+        
+    }//GEN-LAST:event_btnGuardar4ActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        
+        txtSocioDni.setText("");
+txtID.setText("");
+txtEntradas.setText("");
+jdcFechaInicio.setDate(null);
+jdcFechaFin.setDate(null);
+txtValor.setText("");
+cbxEstado.setState(true);
+JOptionPane.showMessageDialog(this, "pase nuevo");
+        
+        
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -349,6 +602,8 @@ public class viewPases extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar4;
     private javax.swing.JButton btnNuevo;
     private java.awt.Checkbox cbxEstado;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -367,4 +622,5 @@ public class viewPases extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSocioDni;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
+
 }
