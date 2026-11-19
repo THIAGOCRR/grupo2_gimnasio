@@ -375,9 +375,7 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
                     txtEspecialidad.setText(entrenador.getEspecialidad());
                     cbxEstado.setSelected(entrenador.isEstado());
                     
-                }else{
-                    JOptionPane.showMessageDialog(this, "no se encontró el entrenador");
-                } 
+                }
             } 
         
         
