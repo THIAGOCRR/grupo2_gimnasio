@@ -174,7 +174,7 @@ public class Principal extends javax.swing.JFrame {
          escritorio.repaint();
         
          
-         viewAsistencias as = new viewAsistencias();
+         viewListarAsistencias as = new viewListarAsistencias();
          escritorio.add(as);
         as.setVisible(true);
         escritorio.moveToFront(as);
