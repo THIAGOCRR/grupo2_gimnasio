@@ -355,7 +355,7 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
          try{
        
                 if(txtDNI.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(this, "ingrese un dni de algun entrenador");
+                    JOptionPane.showMessageDialog(this, "Ingrese un dni de algun entrenador");
                     return;
                 }
                 
@@ -375,13 +375,17 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
                     txtEspecialidad.setText(entrenador.getEspecialidad());
                     cbxEstado.setSelected(entrenador.isEstado());
                     
-                }
+                } else {
+        
+        JOptionPane.showMessageDialog(this, "No hay un DNI de algun socio que sea igual a ese");
+        
+        }
             } 
         
         
         catch(NumberFormatException e ){
         
-        JOptionPane.showMessageDialog(this ,"ingrese un numero valido de algun entrenador ");
+        JOptionPane.showMessageDialog(this ,"ingrese un numero valido de algun entrenador " );
         
         
         }
@@ -407,13 +411,42 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
         String nombre = txtNombre.getText().trim();
         String apellido = txtApellido.getText().trim();
         String especialidad = txtEspecialidad.getText().trim();
-            
-            if(nombre.isEmpty() || apellido.isEmpty() || especialidad.isEmpty() ){
-                JOptionPane.showMessageDialog(this, "alguno de los campos nombre, apellido o especialidad estan vacios");
+         
+        
+        if(txtID.getText().trim().isEmpty()){
+                
+                
+                JOptionPane.showMessageDialog(this, "El campo de el ID entrenador no puede estar vacio");
                 return;
                  
                 
             }
+        
+        
+            if(especialidad.trim().isEmpty() ){
+                
+                
+                JOptionPane.showMessageDialog(this, "El campo especialidad no puede estar vacia");
+                return;
+                 
+                
+            }
+            
+             if(nombre.trim().isEmpty()){
+            
+            JOptionPane.showMessageDialog(null, "El apellido no puede estar vacio");
+            
+            
+            }
+            
+            
+            if(nombre.trim().isEmpty()){
+            
+            JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio");
+            
+            
+            }
+            
             
             boolean estado = cbxEstado.isSelected(); 
                   Entrenador agregar = new Entrenador(dni, nombre, apellido, especialidad, estado);
@@ -439,13 +472,13 @@ if (Activo) {
 }
 
 */
-                  
+                  JOptionPane.showMessageDialog(null, "Entrenador agregado correctamente");
                   
         
          } catch (Exception ex){
-            JOptionPane.showMessageDialog(this, "error al guardar: "+ex.getMessage());  
+            JOptionPane.showMessageDialog(this, "error al guardar: "+ ex.getMessage());  
         }
-
+    
 
 
 
@@ -463,7 +496,7 @@ if (Activo) {
         //
         
         if (txtID.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "busca primero un entrenador");
+        JOptionPane.showMessageDialog(this, "Busca primero el dni para eliminar el entrenador con su id");
         return;
     }
 
@@ -477,9 +510,10 @@ if (Activo) {
             txtApellido.setText("");
             txtEspecialidad.setText("");
         en.eliminarEntrenador(id);
+JOptionPane.showMessageDialog(null, "Entrenador Eliminado");
 
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "el ID debe ser un número valido");
+        JOptionPane.showMessageDialog(this, "El ID debe ser un número valido");
     }
         
         
@@ -493,24 +527,21 @@ if (Activo) {
         
         try{
         if(txtID.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "debes buscar un entrenador para obtener su ID");
+            JOptionPane.showMessageDialog(this, "Busca primero un entrenador");
             return;
         }
         
-        if(txtDNI.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(this, "ingresa el nuevo número de DNI");
-            return;
-        }
+        
         if(txtNombre.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(this, "ingresa el nuevo nombre");
+            JOptionPane.showMessageDialog(this, "El nombre es obligatorio");
             return;
         }
         if(txtApellido.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(this, "ingresa el nuevo apellido");
+            JOptionPane.showMessageDialog(this, "El apellido es obligatorio");
             return;
         }
         if(txtEspecialidad.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(this, "ingresa la especialidad");
+            JOptionPane.showMessageDialog(this, "La especialidad es obligatoria");
             return;
         }
         
@@ -532,10 +563,10 @@ if (Activo) {
         
         en.ActualizarEntrenador(entrenadorActualizar);
         
-      
+       JOptionPane.showMessageDialog(null, "Entrenador Actualizado");
         
     }catch(Exception e){
-        JOptionPane.showMessageDialog(this, "error al procesar la informacion: "+ e.getMessage());
+        JOptionPane.showMessageDialog(this, "Error al procesar la informacion: "+ e.getMessage());
     }
         
         
@@ -557,7 +588,7 @@ if (Activo) {
         
         
          if (txtID.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "debes buscar un entrenador primero");
+        JOptionPane.showMessageDialog(this, "Busca primero un entrenador ");
         return;
     }
         
@@ -565,11 +596,11 @@ if (Activo) {
         
         int idEntrenador = Integer.parseInt(txtID.getText().trim());
         en.altaLogica(idEntrenador);
-        
-        
-        
+        /*
+        EntrenadorData: JOptionPane.showMessageDialog(null, "Entrenador activado");
+        */
         } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "el DNI debe ser un número válido");
+        JOptionPane.showMessageDialog(this, "El DNI debe ser un número válido");
     }
         
     }//GEN-LAST:event_btnAltaLogicaActionPerformed
@@ -579,7 +610,7 @@ if (Activo) {
         
         
          if (txtID.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "debes buscar un entrenador primero");
+        JOptionPane.showMessageDialog(this, "Debes buscar un entrenador primero");
         return;
     }
         
@@ -589,10 +620,11 @@ if (Activo) {
         
         
         en.bajaLogica(idEntrenador);
-        
-        
+        /*
+        EntrenadorData: JOptionPane.showMessageDialog(null, "Entrenador desactivado (baja lógica)");
+           */     
         } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "el DNI debe ser un numero valido");
+        JOptionPane.showMessageDialog(this, "El DNI debe ser un numero valido");
     }
         
         

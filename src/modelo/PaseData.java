@@ -48,11 +48,7 @@ public class PaseData {
             
                 System.out.println("Pase guardado correctamente");
                 
-            } else {
-            
-                System.out.println("No se ha podido guardar el pase");
-            
-            }
+            } 
             
             ps.close();
         } catch (SQLException ex) {

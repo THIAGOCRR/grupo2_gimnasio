@@ -319,13 +319,16 @@ txtID.setEditable(false);
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         
+        
+    try {    
     String dniTxt = txtSocioDni.getText().trim();
     
-    if (dniTxt.isEmpty()) {
-        return;
+    if (txtSocioDni.getText().trim().isEmpty()) {
+       JOptionPane.showMessageDialog(null, "El dni esta vacio"); 
+       return;
     }
     
-    try {
+    
         int dni = Integer.parseInt(dniTxt);
         
         Socio socio = sd.buscarSocioInt(dni);
@@ -346,7 +349,7 @@ txtID.setEditable(false);
                 cbxEstado.setState(pase.isEstado());
                 
             
-            
+          
             
         } 
         else {
@@ -355,7 +358,7 @@ txtID.setEditable(false);
                     "el socio no tiene pases.");
         }
         
-        } else{
+        } else {
         
         JOptionPane.showMessageDialog(this, "No hay un DNI de algun socio que sea igual a ese");
         
@@ -377,7 +380,7 @@ txtID.setEditable(false);
         
           if (txtID.getText().trim().isEmpty()) {
               
-        JOptionPane.showMessageDialog(this, "Ingrese el ID del pase a eliminar");
+        JOptionPane.showMessageDialog(this, "Busca el dni para eliminar el pase con el id");
         return;
     }
         
@@ -388,7 +391,7 @@ txtID.setEditable(false);
         JOptionPane.showMessageDialog(this, "Pase eliminado");
        
     } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "ID invalido");
+        JOptionPane.showMessageDialog(this, "el ID debe ser un numero valido");
     }
         
         
@@ -398,20 +401,28 @@ txtID.setEditable(false);
         // TODO add your handling code here:
            try {
         if (txtSocioDni.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "debes buscar el dni de un socio antes");
+            JOptionPane.showMessageDialog(this, "El DNI no puede estar vacio");
             return;
             
          
         }
+        
+         if (txtID.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Busca primero un socio");
+            return;
+            
+         
+        }
+        
         if (txtEntradas.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "ingrese la cantidad de entradas");
+            JOptionPane.showMessageDialog(this, "Las entradas son obligatorias");
             return;
             
             
         }
         if (txtValor.getText().trim().isEmpty()) {
             
-            JOptionPane.showMessageDialog(this, "ingrese el valor del pase");
+            JOptionPane.showMessageDialog(this, "El valor de el pase es obligatorio");
             return;
             
             
@@ -461,10 +472,10 @@ txtID.setEditable(false);
      
         
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "revise que los numeros sean correctos");
+        JOptionPane.showMessageDialog(this, "revise que solo haya numeros en los campos adecuados");
         
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "error al procesar la informacion: " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "error: " + e.getMessage());
         
     }
         
@@ -478,7 +489,7 @@ txtID.setEditable(false);
         try {
         if (idSocio == -1) {
             
-            JOptionPane.showMessageDialog(this, "primero busque un socio por DNI");
+            JOptionPane.showMessageDialog(this, "Busca un socio primero");
             
             return;
             
@@ -487,7 +498,7 @@ txtID.setEditable(false);
             
         if (txtEntradas.getText().trim().isEmpty()) {
             
-            JOptionPane.showMessageDialog(this, "ingrese la cantidad de entradas");
+            JOptionPane.showMessageDialog(this, "Las entradas son obligatorias");
             
             return;
             
@@ -497,7 +508,7 @@ txtID.setEditable(false);
         
         if (txtValor.getText().trim().isEmpty()) {
             
-            JOptionPane.showMessageDialog(this, "ingrese el valor del pase");
+            JOptionPane.showMessageDialog(this, "El valor del pase es obligatorio");
             return;
         }
         
@@ -548,7 +559,7 @@ if (activo) {
      JOptionPane.showMessageDialog(null, "pase guardado correctamente");
         
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "revise que los atributos sean correctos");
+        JOptionPane.showMessageDialog(this, "revise que solo haya numeros en los campos adecuados");
     }
         
         catch (Exception e) {

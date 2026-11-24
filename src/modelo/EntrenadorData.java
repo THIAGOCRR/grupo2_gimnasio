@@ -49,7 +49,7 @@ public class EntrenadorData {
         System.out.println("Entrenadores cargados:" );
 
     } catch (SQLException e) {
-        System.err.println("Error al listar:");
+        JOptionPane.showMessageDialog(null, "Error al listar:");
     }
     return lista;
 }
@@ -83,8 +83,7 @@ public class EntrenadorData {
         
     
     }
-    else{ JOptionPane.showMessageDialog(null, "No existe ese entrenador");}
-    ps.close();
+   
     
     }catch(SQLException ex){
     
@@ -116,13 +115,14 @@ public class EntrenadorData {
      int exito = ps.executeUpdate();
      if (exito ==1){
      
-         JOptionPane.showMessageDialog(null, "Entrenador Eliminado");
+       
+       System.out.println("Entrenador Eliminado");
          
      }
      }catch(SQLException ex ){
              
              
-             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla entrenador");
+             JOptionPane.showMessageDialog(null, "Error al intentar borrar al Entrenador:"+ex.getMessage());
              
              
              
@@ -173,7 +173,7 @@ public class EntrenadorData {
              
              if (exito == 1 ){
              
-             JOptionPane.showMessageDialog(null, "Entrenador Actualizado");
+            
              
              }
              
@@ -204,17 +204,17 @@ public class EntrenadorData {
         ps.setInt(1, entrenador.getDni());
         ps.setString(2, entrenador.getNombre());
         ps.setString(3, entrenador.getApellido());
-        ps.setString(4, entrenador.getEspecialidad());
+    ps.setString(4, entrenador.getEspecialidad());
         ps.setBoolean(5, entrenador.isEstado());
 
         int exito = ps.executeUpdate();
 
         if (exito == 1) {
-            JOptionPane.showMessageDialog(null, "Entrenador agregado correctamente");
+            
         }
 
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al agregar entrenador");
+        JOptionPane.showMessageDialog(null, "Error al agregar entrenador" + ex.getMessage());
     }
    
    
@@ -244,10 +244,8 @@ public class EntrenadorData {
         int filas = ps.executeUpdate();
 
         if (filas == 1) {
-            JOptionPane.showMessageDialog(null, "Entrenador desactivado (baja lógica)");
-        } else {
-            JOptionPane.showMessageDialog(null, "No existe ese entrenador");
-        }
+          JOptionPane.showMessageDialog(null, "Entrenador desactivado (baja lógica)");
+        } 
 
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, "Error al dar baja: " + ex.getMessage());
