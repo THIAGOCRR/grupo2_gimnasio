@@ -35,7 +35,7 @@ public class miConexion {
             try {
               
                 Class.forName("org.mariadb.jdbc.Driver");  
-                conexion = DriverManager.getConnection("jdbc:mariadb://localhost:3306/gimnasio", "root", "");  
+                conexion = DriverManager.getConnection("jdbc:mariadb://localhost:3306/aboriGym", "root", "");  
             } catch (SQLException | ClassNotFoundException ex) { 
                 System.out.println("No se puede conectar o no se puede cargar el driver. Error: "+ ex.getMessage());
             }
