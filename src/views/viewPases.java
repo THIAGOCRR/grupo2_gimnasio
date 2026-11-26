@@ -37,7 +37,7 @@ public class viewPases extends javax.swing.JInternalFrame {
             txtID.setEnabled(false);
 txtID.setEditable(false);
 
-jdcFechaFin.setEnabled(false);
+
     }
 
     /**
@@ -515,9 +515,9 @@ jdcFechaFin.setEnabled(false);
         }
         
         
-        if (jdcFechaInicio.getDate() == null || jdcFechaFin.getDate() == null) {
+        if (jdcFechaInicio.getDate() == null ) {
             
-            JOptionPane.showMessageDialog(this, "seleccione las fechas");
+            JOptionPane.showMessageDialog(this, "seleccione la fecha inicio");
             return;
         }
         
@@ -531,10 +531,8 @@ jdcFechaFin.setEnabled(false);
         java.sql.Date sqlInicio = new java.sql.Date(Inicio.getTime());
         java.time.LocalDate fechaInicio = sqlInicio.toLocalDate();
         
-        java.util.Date utilFin = jdcFechaFin.getDate();
-        java.sql.Date sqlFin = new java.sql.Date(utilFin.getTime());
-        java.time.LocalDate fechaFin = sqlFin.toLocalDate();
-        
+      java.time.LocalDate fechaFin = fechaInicio.plusDays(30);
+        jdcFechaFin.setDate(java.sql.Date.valueOf(fechaFin));
      
         Pase nuevoPase = new Pase();
         nuevoPase.setSocio(idSocio);
