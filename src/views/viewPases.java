@@ -326,7 +326,7 @@ txtID.setEditable(false);
     String dniTxt = txtSocioDni.getText().trim();
     
     if (txtSocioDni.getText().trim().isEmpty()) {
-       JOptionPane.showMessageDialog(null, "El dni esta vacio"); 
+       JOptionPane.showMessageDialog(null, "El DNI de el socio esta vacio"); 
        return;
     }
     
@@ -402,12 +402,7 @@ txtID.setEditable(false);
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
            try {
-        if (txtSocioDni.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "El DNI no puede estar vacio");
-            return;
-            
-         
-        }
+       
         
          if (txtID.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Busca primero un socio");
@@ -531,6 +526,7 @@ txtID.setEditable(false);
         java.sql.Date sqlInicio = new java.sql.Date(Inicio.getTime());
         java.time.LocalDate fechaInicio = sqlInicio.toLocalDate();
         
+        /*plusDays(30)*/
       java.time.LocalDate fechaFin = fechaInicio.plusDays(30);
         jdcFechaFin.setDate(java.sql.Date.valueOf(fechaFin));
      

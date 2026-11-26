@@ -160,8 +160,7 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txtDNI)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnBuscar)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                        .addComponent(btnBuscar)))))
                         .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -273,11 +272,12 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbEstado)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbEstado)
+                        .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -302,6 +302,7 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
         btnRegistrar.setBackground(new java.awt.Color(204, 153, 255));
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
         btnNuevo.setBackground(new java.awt.Color(204, 153, 255));
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-delete-64.png"))); // NOI18N
@@ -315,6 +316,7 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
         btnActualizar.setBackground(new java.awt.Color(204, 153, 255));
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-aprobar-y-actualizar-48.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/7090891.png"))); // NOI18N
 
@@ -402,7 +404,7 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
       String dniText = txtDNI.getText().trim();
     
     if (dniText.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "El DNI está vacío");
+        JOptionPane.showMessageDialog(this, "El DNI de el socio está vacío");
         return;
     }
     
@@ -451,6 +453,25 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
             
             
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+        
+        /* guardar la asistencia de el socio con estas condiciones: que tenga un limite de las clases con sus entradas y fecha fin, el socio
+        puede estar activo solo si el socio renovo su suscripcion de la clase, el socio no debe figurar el estado activo si supera su fecha fin
+        (cambiar eso tambien en listarAsistencias), 
+        */
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

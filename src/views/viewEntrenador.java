@@ -355,7 +355,7 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
          try{
        
                 if(txtDNI.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(this, "Ingrese un dni de algun entrenador");
+                    JOptionPane.showMessageDialog(this, "El DNI de el entrenador esta vacio");
                     return;
                 }
                 
@@ -416,7 +416,7 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
         if(txtID.getText().trim().isEmpty()){
                 
                 
-                JOptionPane.showMessageDialog(this, "El campo de el ID entrenador no puede estar vacio");
+                JOptionPane.showMessageDialog(this, "Busca primero un entrenador");
                 return;
                  
                 
@@ -426,25 +426,25 @@ public class viewEntrenador extends javax.swing.JInternalFrame {
             if(especialidad.trim().isEmpty() ){
                 
                 
-                JOptionPane.showMessageDialog(this, "El campo especialidad no puede estar vacia");
+                JOptionPane.showMessageDialog(this, "El campo especialidad es obligatoria");
                 return;
                  
                 
             }
             
-             if(nombre.trim().isEmpty()){
+             if(apellido.trim().isEmpty()){
             
-            JOptionPane.showMessageDialog(null, "El apellido no puede estar vacio");
+            JOptionPane.showMessageDialog(null, "El apellido es obligatoria");
             
-            
+            return;
             }
             
             
             if(nombre.trim().isEmpty()){
             
-            JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio");
+            JOptionPane.showMessageDialog(null, "El nombre es obligatoria");
             
-            
+               return;
             }
             
             
@@ -496,7 +496,7 @@ if (Activo) {
         //
         
         if (txtID.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Busca primero el dni para eliminar el entrenador con su id");
+        JOptionPane.showMessageDialog(this, "Busca primero un entrenador");
         return;
     }
 
@@ -610,7 +610,7 @@ JOptionPane.showMessageDialog(null, "Entrenador Eliminado");
         
         
          if (txtID.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Debes buscar un entrenador primero");
+        JOptionPane.showMessageDialog(this, "Busca primero un entrenador");
         return;
     }
         
