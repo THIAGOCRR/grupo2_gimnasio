@@ -34,8 +34,9 @@ public class Principal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2Entrenador = new javax.swing.JMenuItem();
@@ -48,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 722, Short.MAX_VALUE)
+            .addGap(0, 1122, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,13 +66,18 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
         jMenu2.add(jMenuItem4);
 
-        jMenuItem3.setText("Asistencias");
-        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
-        jMenu2.add(jMenuItem3);
-
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Edit");
+        jMenu3.setText("Asistencias");
+
+        jMenuItem2.setText("Formulario de Asistencias");
+        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem3.setText("Listar Asistencias");
+        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
+        jMenu3.add(jMenuItem3);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Clases");
@@ -201,6 +207,24 @@ public class Principal extends javax.swing.JFrame {
         escritorio.moveToFront(clase);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        
+         escritorio.removeAll();
+        escritorio.repaint();
+
+        viewAsistencias clase = new viewAsistencias();
+        escritorio.add(clase);
+        clase.setVisible(true);
+        escritorio.moveToFront(clase);
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -234,6 +258,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem2Entrenador;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

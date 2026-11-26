@@ -4,17 +4,43 @@
  */
 package views;
 
+import entidades.Asistencia;
+import entidades.Pase;
+import entidades.Socio;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import modelo.AsistenciaData;
+import modelo.EntrenadorData;
+import modelo.PaseData;
+import modelo.miConexion;
+import modelo.sociosData;
+
 /**
  *
  * @author crn70
  */
 public class viewAsistencias extends javax.swing.JInternalFrame {
-
+  private miConexion conexion=new miConexion();
+    private AsistenciaData so=new AsistenciaData(conexion);
+    private PaseData pa=new PaseData(conexion);
+       private AsistenciaData as=new AsistenciaData(conexion);
+   int idSocio; 
+   int idPase;
+   private sociosData sd=new sociosData(conexion);
     /**
      * Creates new form viewAsistencias
      */
     public viewAsistencias() {
         initComponents();
+        
+         miConexion conexion=new miConexion();
+    
+     AsistenciaData so =new AsistenciaData(conexion);
+        
+         idSocio = -1;
+        idPase = -1;
+        
+        
     }
 
     /**
@@ -46,12 +72,12 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         cbEstado = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
-        dtFechaInicio1 = new com.toedter.calendar.JDateChooser();
+        jdcFechaInicio = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtEntradas = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        dtFechaInicio2 = new com.toedter.calendar.JDateChooser();
+        jdcFechafin = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
@@ -92,6 +118,7 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
         jLabel9.setText("Datos de la asistencia");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("Clase:");
@@ -102,44 +129,50 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
+                                .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnBuscar))
+                                    .addComponent(jLabel9)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtIdAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtIdAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel9)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dtFechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                            .addComponent(txtNombre))))
-                .addGap(70, 70, 70))
+                                .addGap(63, 63, 63)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtDNI)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnBuscar)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGap(54, 54, 54)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(dtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,17 +196,16 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscar)
+                            .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar))
-                        .addGap(18, 18, 18)
+                        .addGap(52, 52, 52)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -191,7 +223,7 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setText("Información del pase");
 
-        dtFechaInicio1.setEnabled(false);
+        jdcFechaInicio.setEnabled(false);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setText("Fecha inicio:");
@@ -204,7 +236,7 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setText("Fecha fin:");
 
-        dtFechaInicio2.setEnabled(false);
+        jdcFechafin.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -217,18 +249,18 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(cbEstado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 358, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dtFechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(dtFechaInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jdcFechafin, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(43, 43, 43))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -257,11 +289,11 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
                                 .addContainerGap(15, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(dtFechaInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jdcFechafin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dtFechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))))
         );
 
@@ -280,6 +312,8 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
 
+        btnActualizar.setBackground(new java.awt.Color(204, 153, 255));
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-aprobar-y-actualizar-48.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/7090891.png"))); // NOI18N
@@ -296,7 +330,7 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnActualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -347,17 +381,76 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
-        
+        txtDNI.setText("");
+        dtFechaInicio.setDate(null);
         txtIdAsistencia.setText("");
         txtNombre.setText("");
         txtApellido.setText("");
+        txtEntradas.setText("");
         cbEstado.setSelected(false);
-        dtFechaInicio.setDate(null);
+        jdcFechaInicio.setDate(null);
+        jdcFechafin.setDate(null);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void txtDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDNIActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+
+      String dniText = txtDNI.getText().trim();
+    
+    if (dniText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "El DNI está vacío");
+        return;
+    }
+    
+    try {
+        int dni = Integer.parseInt(dniText);
+        Socio socio = sd.buscarSocioInt(dni);
+                
+        if (socio != null) {
+            
+            idSocio = socio.getIdSocio();
+            txtNombre.setText(socio.getNombre());
+            txtApellido.setText(socio.getApellido());
+            
+            ArrayList<Pase> lista = pa.buscarPasesPorSocio(idSocio);
+               ArrayList<Asistencia> lista2 = as.buscarAsistenciaPorSocio(idSocio);
+               
+            if (lista.size() > 0 || !lista2.isEmpty()) {
+                
+                 Asistencia asistencia = lista2.get(0);
+                Pase pase = lista.get(0);
+                         
+                 txtIdAsistencia.setText(String.valueOf(asistencia.getIdAsistencia()));     
+                txtEntradas.setText(String.valueOf(pase.getCantidadPases()));
+                jdcFechaInicio.setDate(java.sql.Date.valueOf(pase.getFechaInicio()));
+                jdcFechafin.setDate(java.sql.Date.valueOf(pase.getFechaFin()));
+                cbEstado.setSelected(pase.isEstado());
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "El socio no tiene pases.");
+           
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "No existe un socio con ese DNI");
+          
+           
+        }
+        
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "El DNI debe ser un número válido");
+    }
+
+    
+            
+            
+            
+            
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -369,8 +462,6 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JCheckBox cbEstado;
     private com.toedter.calendar.JDateChooser dtFechaInicio;
-    private com.toedter.calendar.JDateChooser dtFechaInicio1;
-    private com.toedter.calendar.JDateChooser dtFechaInicio2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -389,6 +480,8 @@ public class viewAsistencias extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private com.toedter.calendar.JDateChooser jdcFechaInicio;
+    private com.toedter.calendar.JDateChooser jdcFechafin;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtDNI;
     private javax.swing.JTextField txtEntradas;

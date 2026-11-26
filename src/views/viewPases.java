@@ -36,6 +36,8 @@ public class viewPases extends javax.swing.JInternalFrame {
          int idPase = -1;
             txtID.setEnabled(false);
 txtID.setEditable(false);
+
+jdcFechaFin.setEnabled(false);
     }
 
     /**
@@ -355,7 +357,7 @@ txtID.setEditable(false);
         else {
        
                 JOptionPane.showMessageDialog(this, 
-                    "el socio no tiene pases.");
+                    "El socio no tiene pases.");
         }
         
         } else {

@@ -66,6 +66,7 @@ public class AsistenciaData {
             
             if (rs.next()) {
                 a = new Asistencia();
+                a.setIdAsistencia(rs.getInt("ID_Asistencia"));
                 a.setSocio(rs.getInt("ID_Socio"));
                 a.setClase(rs.getInt("ID_Clase"));
                 a.setFechaAsistencia(rs.getDate("Fecha_Asistencia").toLocalDate());
@@ -82,6 +83,38 @@ public class AsistenciaData {
         }
         return a;
     }
+    
+     public ArrayList<Asistencia> buscarAsistenciaPorSocio(int idSocio) {
+     
+     String sql = "SELECT * FROM asistencias WHERE ID_Socio = ?";
+    
+    ArrayList<Asistencia> lista = new ArrayList<>();
+    
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idSocio);
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            Asistencia a = new Asistencia();
+            a.setIdAsistencia(rs.getInt("ID_Asistencia"));
+            a.setSocio(rs.getInt("ID_Socio"));
+            a.setClase(rs.getInt("ID_Clase"));
+            a.setFechaAsistencia(rs.getDate("Fecha_Asistencia").toLocalDate());
+            lista.add(a);
+        }
+        
+        rs.close();
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al buscar asistencias: " + ex.getMessage());
+    }
+    
+    return lista;
+     
+     
+     
+     }
     
     public ArrayList<Asistencia> listarAsistencia() {
         
